@@ -25,18 +25,11 @@ public class TestContextLoader implements ContextLoader {
 	@Override
 	public ApplicationContext loadContext(String... locations) throws Exception {
 
-		List<String> classNameList;
 		try {
-			classNameList = new AutoUnitConfigImpl().listIntegrationRunnable();
+			AutoUnitInitializer.init();
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
-		}
-
-		for (String className : classNameList) {
-			@SuppressWarnings("unchecked")
-			Class<Runnable> clazz = (Class<Runnable>) Class.forName(className);
-			clazz.newInstance().run();
 		}
 
 		if (locations.length == 0) {
