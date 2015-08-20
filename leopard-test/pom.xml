@@ -28,7 +28,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>javahost</artifactId>
