@@ -30,8 +30,7 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>autounit</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<scope>provided</scope>
+				<version>0.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
