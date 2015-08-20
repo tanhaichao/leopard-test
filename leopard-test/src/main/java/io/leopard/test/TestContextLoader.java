@@ -1,10 +1,5 @@
 package io.leopard.test;
 
-import io.leopard.autounit.config.AutoUnitConfigImpl;
-
-import java.io.IOException;
-import java.util.List;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextLoader;
@@ -28,8 +23,8 @@ public class TestContextLoader implements ContextLoader {
 		try {
 			AutoUnitInitializer.init();
 		}
-		catch (Exception e) {
-			throw new RuntimeException(e.getMessage(), e);
+		catch (NoClassDefFoundError e) {
+			// throw new RuntimeException(e.getMessage(), e);
 		}
 
 		if (locations.length == 0) {
