@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.leopard</groupId>
+	<artifactId>leopard-test-parent</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>io.leopard.depend</groupId>
+		<artifactId>depend</artifactId>
+		<version>0.0.8</version>
+	</parent>
+
+	<scm>
+		<url>https://github.com/tanhaichao/leopard-test</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</developerConnection>
+	</scm>
+
+	<modules>
+		<module>leopard-jetty</module>
+		<module>leopard-test</module>
+		<module>leopard-mock</module>
+	</modules>
+</project>
