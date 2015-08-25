@@ -13,8 +13,8 @@ public class ServerInitializerImpl implements ServerInitializer {
 			runnable.run();
 		}
 		catch (Exception e) {
-			System.err.println("init hosts error:" + e.toString());
-			e.printStackTrace();
+			// System.err.println("init hosts error:" + e.toString());
+			// e.printStackTrace();
 		}
 		System.setProperty("spring.profiles.active", "dev");
 
