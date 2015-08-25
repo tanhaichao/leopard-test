@@ -23,13 +23,13 @@ public class WebServerJettyImpl extends AbstractWebServer {
 	 * 创建用于正常运行调试的Jetty Server, 以src/main/webapp为Web应用目录.
 	 */
 	@Override
-	public Server build(int port, String contextPath) throws BindException {
+	public Server build(int port, String webApp, String contextPath) throws BindException {
 		port = this.getAutoPort(port);
 
 		serverInitializer.run();
 
 		Server server = new Server(port);
-		WebAppContext webContext = new WebAppContext("src/main/webapp", contextPath);
+		WebAppContext webContext = new WebAppContext(webApp, contextPath);
 		webContext.setDefaultsDescriptor("leopard-jetty/webdefault.xml");
 
 		// 问题点：http://stackoverflow.com/questions/13222071/spring-3-1-webapplicationinitializer-embedded-jetty-8-annotationconfiguration

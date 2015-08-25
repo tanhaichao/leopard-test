@@ -13,14 +13,20 @@ public class JettyServer {
 		return start(80);
 	}
 
+	public static Server start(String webApp) throws Exception {
+		return start(webApp, "/", 80);
+	}
+
 	public static Server start(int port) throws Exception {
-		Server server = start("/", port);
-		return server;
+		return start("/", port);
 	}
 
 	public static Server start(String contextPath, int port) throws Exception {
+		return start("src/main/webapp", contextPath, port);
+	}
 
-		Server server = new WebServerJettyImpl().build(port, contextPath);
+	public static Server start(String webApp, String contextPath, int port) throws Exception {
+		Server server = new WebServerJettyImpl().build(port, webApp, contextPath);
 		server.start();
 		return server;
 	}

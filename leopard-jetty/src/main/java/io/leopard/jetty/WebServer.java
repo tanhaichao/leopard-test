@@ -6,6 +6,6 @@ import org.eclipse.jetty.server.Server;
 
 public interface WebServer {
 
-	Server build(int port, String contextPath) throws BindException;
+	Server build(int port, String webApp, String contextPath) throws BindException;
 
 }
