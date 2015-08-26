@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard</groupId>
 	<artifactId>leopard-test-parent</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -12,9 +12,9 @@
 	</parent>
 
 	<scm>
-		<url>https://github.com/tanhaichao/leopard-test/tags/leopard-test-parent-0.0.3</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard-test/tags/leopard-test-parent-0.0.3</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-test/tags/leopard-test-parent-0.0.3</developerConnection>
+		<url>https://github.com/tanhaichao/leopard-test</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</developerConnection>
 	</scm>
 
 
