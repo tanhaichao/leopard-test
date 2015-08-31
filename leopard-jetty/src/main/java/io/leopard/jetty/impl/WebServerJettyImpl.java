@@ -33,15 +33,15 @@ public class WebServerJettyImpl extends AbstractWebServer {
 		webContext.setDefaultsDescriptor("leopard-jetty/webdefault.xml");
 
 		// 问题点：http://stackoverflow.com/questions/13222071/spring-3-1-webapplicationinitializer-embedded-jetty-8-annotationconfiguration
-		webContext.setConfigurations(new Configuration[] { //
-				new EmbedWebInfConfiguration()//
-						, new EmbedWebXmlConfiguration()//
-						, new EmbedMetaInfConfiguration()//
-						, new FragmentConfiguration()//
-						, new EmbedAnnotionConfiguration() //
-				// new PlusConfiguration(),
-				// new EnvConfiguration()
-				});
+		// webContext.setConfigurations(new Configuration[] { //
+		// new EmbedWebInfConfiguration()//
+		// , new EmbedWebXmlConfiguration()//
+		// , new EmbedMetaInfConfiguration()//
+		// , new FragmentConfiguration()//
+		// , new EmbedAnnotionConfiguration() //
+		// // new PlusConfiguration(),
+		// // new EnvConfiguration()
+		// });
 
 		WebAppClassLoader classLoader = null;
 		try {
