@@ -1,14 +1,17 @@
 package io.leopard.jetty.configuration;
 
+import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
+import org.eclipse.jetty.webapp.WebAppContext;
 
 public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 
 	// protected void addTldResource(final WebAppContext context, Resource resource, String name) throws IOException {
 	// Resource tldResource = resource.getResource(name);
 	// if (tldResource.exists()) {
-	// // System.err.println("tldResource:" + tldResource);
-	// // addResource(context, METAINF_TLDS, Resource.newResource(tldResource.getURL()));
 	// addResource(context, METAINF_TLDS, tldResource);
 	// }
 	// }
@@ -16,9 +19,6 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 	// protected void addFolderResource(final WebAppContext context) throws IOException {
 	// for (Resource resource : context.getMetaData().getWebInfJars()) {
 	// String url = resource.toString();
-	// // if (!url.endsWith(".jar")) {
-	// // System.err.println("url:" + url);
-	// // }
 	// if (!isClassesDir(url)) {
 	// continue;
 	// }
@@ -29,20 +29,26 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 	// }
 	// }
 	//
-	//
 	// this.addTldResource(context, resource, "META-INF/fnx.tld");
 	// this.addTldResource(context, resource, "META-INF/dw.tld");
 	// }
 	// }
-	//
-	// protected boolean isClassesDir(String url) {
-	// return url.endsWith("/classes/") || url.endsWith("/classes");
-	// }
-	//
-	// @Override
-	// public void preConfigure(final WebAppContext context) throws Exception {
-	// this.addFolderResource(context);
-	// super.preConfigure(context);
-	// }
+
+	@Override
+	public void scanForFragment(WebAppContext context, Resource jar, ConcurrentHashMap<Resource, Resource> cache) throws Exception {
+		System.out.println("jar:" + jar.toString());
+		super.scanForFragment(context, jar, cache);
+	}
+
+	protected boolean isClassesDir(String url) {
+		return url.endsWith("/classes/") || url.endsWith("/classes");
+	}
+
+	@Override
+	public void preConfigure(final WebAppContext context) throws Exception {
+		// this.addFolderResource(context);
+		System.out.println("preConfigure:" + context);
+		super.preConfigure(context);
+	}
 
 }
