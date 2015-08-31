@@ -1,6 +1,5 @@
 package io.leopard.jetty.configuration;
 
-import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.jetty.util.resource.Resource;
@@ -36,7 +35,7 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 
 	@Override
 	public void scanForFragment(WebAppContext context, Resource jar, ConcurrentHashMap<Resource, Resource> cache) throws Exception {
-		System.out.println("jar:" + jar.toString());
+		// System.out.println("jar111:" + jar.toString());
 		super.scanForFragment(context, jar, cache);
 	}
 
@@ -44,11 +43,19 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 		return url.endsWith("/classes/") || url.endsWith("/classes");
 	}
 
-	@Override
-	public void preConfigure(final WebAppContext context) throws Exception {
-		// this.addFolderResource(context);
-		System.out.println("preConfigure:" + context);
-		super.preConfigure(context);
-	}
+	// @Override
+	// public void preConfigure(final WebAppContext context) throws Exception {
+	// // this.addFolderResource(context);
+	// // System.out.println("preConfigure:" + context);
+	// super.preConfigure(context);
+	//
+	// @SuppressWarnings("unchecked")
+	// Map<Resource, Resource> frags = (Map<Resource, Resource>) context.getAttribute(METAINF_FRAGMENTS);
+	// if (frags != null) {
+	// for (Resource key : frags.keySet()) {
+	// System.err.println("key1:" + key);
+	// }
+	// }
+	// }
 
 }

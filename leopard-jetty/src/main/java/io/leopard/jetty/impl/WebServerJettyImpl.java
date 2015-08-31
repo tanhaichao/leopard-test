@@ -2,6 +2,7 @@ package io.leopard.jetty.impl;
 
 import io.leopard.jetty.ServerInitializer;
 import io.leopard.jetty.configuration.EmbedAnnotionConfiguration;
+import io.leopard.jetty.configuration.EmbedFragmentConfiguration;
 import io.leopard.jetty.configuration.EmbedMetaInfConfiguration;
 import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
 import io.leopard.jetty.configuration.EmbedWebXmlConfiguration;
@@ -11,7 +12,6 @@ import java.net.BindException;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.Configuration;
-import org.eclipse.jetty.webapp.FragmentConfiguration;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -37,10 +37,10 @@ public class WebServerJettyImpl extends AbstractWebServer {
 				new EmbedWebInfConfiguration()//
 						, new EmbedWebXmlConfiguration()//
 						, new EmbedMetaInfConfiguration()//
-						, new FragmentConfiguration()//
+						, new EmbedFragmentConfiguration()//
 						, new EmbedAnnotionConfiguration() //
-				// new PlusConfiguration(),
-				// new EnvConfiguration()
+				// , new PlusConfiguration(),//
+				// new EnvConfiguration()//
 				});
 
 		WebAppClassLoader classLoader = null;
