@@ -1,7 +1,6 @@
 package io.leopard.jetty.impl;
 
 import io.leopard.jetty.ServerInitializer;
-import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
 
 import java.io.IOException;
 import java.net.BindException;
@@ -35,8 +34,7 @@ public class WebServerJettyImpl extends AbstractWebServer {
 
 		// 问题点：http://stackoverflow.com/questions/13222071/spring-3-1-webapplicationinitializer-embedded-jetty-8-annotationconfiguration
 		webContext.setConfigurations(new Configuration[] { //
-				new EmbedWebInfConfiguration()//
-						, new WebInfConfiguration()//
+				new WebInfConfiguration()//
 						, new MetaInfConfiguration()//
 						, new FragmentConfiguration()//
 						, new AnnotationConfiguration() //
@@ -63,5 +61,4 @@ public class WebServerJettyImpl extends AbstractWebServer {
 
 		return server;
 	}
-
 }
