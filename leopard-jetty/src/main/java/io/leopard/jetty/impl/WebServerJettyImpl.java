@@ -46,7 +46,7 @@ public class WebServerJettyImpl extends AbstractWebServer {
 		// ClassLoader tldClassLoader = addTldLib(classLoader);
 		// webContext.setClassLoader(classLoader);
 
-		webContext.setParentLoaderPriority(true);
+		// webContext.setParentLoaderPriority(true);
 		// logger.debug(webContext.dump());
 		server.setHandler(webContext);
 		server.setStopAtShutdown(true);
