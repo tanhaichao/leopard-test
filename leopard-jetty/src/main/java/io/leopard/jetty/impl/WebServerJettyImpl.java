@@ -14,6 +14,7 @@ import org.eclipse.jetty.webapp.MetaInfConfiguration;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
+import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 public class WebServerJettyImpl extends AbstractWebServer {
 
@@ -39,6 +40,7 @@ public class WebServerJettyImpl extends AbstractWebServer {
 						, new MetaInfConfiguration()//
 						, new FragmentConfiguration()//
 						, new AnnotationConfiguration() //
+						, new WebXmlConfiguration() //
 				// new PlusConfiguration(),
 				// new EnvConfiguration()
 				});
