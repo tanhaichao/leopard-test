@@ -1,10 +1,6 @@
 package io.leopard.jetty.configuration;
 
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
-import org.eclipse.jetty.webapp.WebAppContext;
 
 public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 
@@ -33,15 +29,9 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 	// }
 	// }
 
-	@Override
-	public void scanForFragment(WebAppContext context, Resource jar, ConcurrentHashMap<Resource, Resource> cache) throws Exception {
-		// System.out.println("jar111:" + jar.toString());
-		super.scanForFragment(context, jar, cache);
-	}
-
-	protected boolean isClassesDir(String url) {
-		return url.endsWith("/classes/") || url.endsWith("/classes");
-	}
+	// protected boolean isClassesDir(String url) {
+	// return url.endsWith("/classes/") || url.endsWith("/classes");
+	// }
 
 	// @Override
 	// public void preConfigure(final WebAppContext context) throws Exception {
