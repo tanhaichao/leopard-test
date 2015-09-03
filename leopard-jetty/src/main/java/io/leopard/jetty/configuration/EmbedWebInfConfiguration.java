@@ -1,5 +1,7 @@
 package io.leopard.jetty.configuration;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -35,15 +37,15 @@ public class EmbedWebInfConfiguration extends WebInfConfiguration {
 		return list;
 	}
 
-	// protected void changeClassLoader(WebAppContext webContext, String jarFile) throws IOException {
-	// // System.err.println("start test");
-	// // System.err.println("webinf:" + webContext.getBaseResource());
-	// ClassLoader classLoader = webContext.getClassLoader();
-	//
-	// URL[] urls = new URL[1];
-	// urls[0] = new File(jarFile).toURI().toURL();
-	// // urls[0] = new File("/work/news/leopard/leopard-web/src/main/resources/").toURI().toURL();
-	// URLClassLoader urlClassLoader = new URLClassLoader(urls, classLoader);
-	// webContext.setClassLoader(urlClassLoader);
-	// }
+	protected void changeClassLoader(WebAppContext webContext, String jarFile) throws IOException {
+		// System.err.println("start test");
+		// System.err.println("webinf:" + webContext.getBaseResource());
+		ClassLoader classLoader = webContext.getClassLoader();
+
+		URL[] urls = new URL[1];
+		urls[0] = new File(jarFile).toURI().toURL();
+		// urls[0] = new File("/work/news/leopard/leopard-web/src/main/resources/").toURI().toURL();
+		URLClassLoader urlClassLoader = new URLClassLoader(urls, classLoader);
+		webContext.setClassLoader(urlClassLoader);
+	}
 }
