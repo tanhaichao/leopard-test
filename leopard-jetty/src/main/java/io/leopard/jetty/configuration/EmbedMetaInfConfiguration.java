@@ -16,6 +16,7 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 			addResource(context, METAINF_TLDS, tldResource);
 		}
 	}
+	
 
 	protected void addFolderResource(final WebAppContext context) throws IOException {
 		for (Resource resource : context.getMetaData().getWebInfJars()) {
