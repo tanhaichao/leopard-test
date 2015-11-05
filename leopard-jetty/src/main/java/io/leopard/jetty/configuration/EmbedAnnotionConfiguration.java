@@ -80,6 +80,7 @@ public class EmbedAnnotionConfiguration extends AnnotationConfiguration {
 				return;
 			}
 
+			
 			parser.clearHandlers();
 			for (AnnotationParser.DiscoverableAnnotationHandler h : _discoverableAnnotationHandlers) {
 				if (h instanceof AbstractDiscoverableAnnotationHandler) {
