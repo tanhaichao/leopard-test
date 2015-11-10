@@ -38,5 +38,6 @@
 		<module>leopard-jetty</module>
 		<module>leopard-test</module>
 		<module>leopard-mock</module>
+		<module>leopard-jetty-test</module>
 	</modules>
 </project>
