@@ -15,7 +15,7 @@ public class JettyHttpnb {
 		catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
-		String result = Httpnb.doGet("http://localhost/index.do");
+		String result = Httpnb.doGet(url);
 		try {
 			server.stop();
 		}
