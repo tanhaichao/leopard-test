@@ -1,5 +1,7 @@
 package io.leopard.test.mvc;
 
+import java.lang.reflect.Field;
+
 import javax.servlet.http.Cookie;
 
 import org.junit.Before;
@@ -34,7 +36,20 @@ public class MockMvcTests {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 		LoginCookieImpl.setApplicationContext(wac);
 		MvcTester.setMockMvc(mockMvc);
+
+//		this.autowired();
+
 	}
+
+	// protected void autowired() {
+	// Field[] fields = this.getClass().getDeclaredFields();
+	// if (fields != null) {
+	// for (Field field : fields) {
+	// System.err.println("autowired field:" + field.getName());
+	// }
+	// }
+	//
+	// }
 
 	protected void example() throws Exception {
 

@@ -57,10 +57,16 @@ public class MvcTester {
 
 		@Override
 		public Object invoke(Object self, Method thisMethod, Method proceed, Object[] args) throws Throwable {
+			if (thisMethod.getName().equals("toString") || thisMethod.getName().equals("hashCode")) {
+				return proceed.invoke(self, args);
+			}
+
 			String uri = this.getUri(thisMethod);
 			MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(uri);
 
-			if (cookieList == null && cookieList.isEmpty()) {
+			if (cookieList == null || cookieList.isEmpty()) {
+				System.err.println("thisMethod:" + thisMethod.toGenericString());
+				System.err.println("proceed:" + proceed.toGenericString());
 				cookieList = LoginCookieImpl.getCookies(thisMethod, args);
 			}
 
