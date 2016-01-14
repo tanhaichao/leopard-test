@@ -1,5 +1,6 @@
 package io.leopard.test.mvc;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -15,7 +16,7 @@ public class XParamBuilderPassportImpl implements XParamBuilder {
 	}
 
 	@Override
-	public void param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value) {
+	public boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Type type) {
 		List<Cookie> cookieList = this.cookieList;
 
 		if (cookieList == null || cookieList.isEmpty()) {
@@ -38,6 +39,7 @@ public class XParamBuilderPassportImpl implements XParamBuilder {
 				requestBuilder.cookie(cookie);
 			}
 		}
+		return true;
 	}
 
 }

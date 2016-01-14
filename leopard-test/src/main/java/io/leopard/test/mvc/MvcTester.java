@@ -3,6 +3,7 @@ package io.leopard.test.mvc;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +68,9 @@ public class MvcTester {
 
 			String[] names = CtClassUtil.getParameterNames(thisMethod);
 
-			new XParamBuilderImpl(requestBuilder, names, args, cookieList);
+			Type[] types = thisMethod.getGenericParameterTypes();
+
+			new XParamBuilderImpl(requestBuilder, names, args, types, cookieList);
 
 			MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 			String json = result.getResponse().getContentAsString();
