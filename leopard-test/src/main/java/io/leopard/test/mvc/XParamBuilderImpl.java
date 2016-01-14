@@ -31,6 +31,7 @@ public class XParamBuilderImpl implements XParamBuilder {
 			return xParamBuilderSessionIdImpl.param(requestBuilder, index, name, value, type);
 		}
 		String typeName = type.getTypeName();
+		
 		if (typeName.equals(String.class.getName())) {
 			requestBuilder.param(name, (String) value);
 		}
