@@ -23,7 +23,7 @@ import io.leopard.javahost.AutoUnitRunnable;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration(value = "src/main/webapp")
 @ContextHierarchy({ @ContextConfiguration(name = "parent", locations = "classpath:/leopard-web/applicationContext.xml") })
-public class MockMvcTests {
+public class MvcTests {
 
 	@Autowired
 	protected WebApplicationContext wac;
