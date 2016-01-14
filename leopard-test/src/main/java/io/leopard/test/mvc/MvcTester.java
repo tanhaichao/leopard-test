@@ -1,6 +1,9 @@
 package io.leopard.test.mvc;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,28 +31,28 @@ public class MvcTester {
 	}
 
 	public static <T> T controller(Class<T> clazz) {
-		return perform(clazz, null);
+		return controller(clazz, null);
 	}
 
-	public static <T> T perform(Class<T> clazz, List<Cookie> cookieList) {
-
-		T bean;
-		try {
-			bean = clazz.newInstance();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		T proxy = ClassProxy.newProxyInstance(clazz, new MethodHandlerImpl(bean));
+	public static <T> T controller(Class<T> clazz, List<Cookie> cookieList) {
+		// T bean;
+		// try {
+		// bean = clazz.newInstance();
+		// }
+		// catch (Exception e) {
+		// throw new RuntimeException(e.getMessage(), e);
+		// }
+		T proxy = ClassProxy.newProxyInstance(clazz, new MethodHandlerImpl(cookieList));
 		return proxy;
 	}
 
 	private static class MethodHandlerImpl implements MethodHandler {
 
-		private final Object bean;
+		// protected final Object bean;
+		protected List<Cookie> cookieList;
 
-		public MethodHandlerImpl(final Object bean) {
-			this.bean = bean;
+		public MethodHandlerImpl(List<Cookie> cookieList) {
+			this.cookieList = cookieList;
 		}
 
 		@Override
@@ -64,19 +67,69 @@ public class MvcTester {
 			System.out.println("methodName:" + methodName + " uri:" + uri);
 			MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(uri);
 
+			if (cookieList != null) {
+				for (Cookie cookie : cookieList) {
+					requestBuilder.cookie(cookie);
+				}
+			}
+
 			MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 			String json = result.getResponse().getContentAsString();
 
 			Map<String, Object> map = Json.toMap(json);
 			String status = (String) map.get("status");
-			String message = (String) map.get("message");
 			Object data = map.get("data");
-			if (!"success".equals(status)) {
-				throw new RuntimeException(message + "(" + status + ")");
+			System.out.println("uri:" + uri + " json:" + json);
+			if ("success".equals(status)) {
+				return data;
 			}
 
-			System.out.println("uri:" + uri + " json:" + json);
-			return data;
+			String message = (String) map.get("message");
+			String exceptionClassName = (String) map.get("exception");
+
+			Exception e = this.toException(exceptionClassName, message);
+			e.printStackTrace();
+
+			throw e;
+		}
+
+		protected Exception toException(String className, String message) throws Throwable {
+			Class<?> clazz = Class.forName(className);
+
+			Constructor<?> constructor = clazz.getConstructors()[0];
+			Class<?>[] types = constructor.getParameterTypes();
+			Object[] initargs = new Object[types.length];
+			for (int i = 0; i < types.length; i++) {
+				initargs[i] = getDefaultValue(types[i]);
+			}
+			Exception exception = (Exception) constructor.newInstance(initargs);
+
+			Field field = Throwable.class.getDeclaredField("detailMessage");
+			field.setAccessible(true);
+			field.set(exception, message);
+			return exception;
+		}
+
+		protected Object getDefaultValue(Class<?> type) {
+			if (type.equals(String.class)) {
+				return "str";
+			}
+			else if (type.equals(int.class) || type.equals(Integer.class)) {
+				return 1;
+			}
+			else if (type.equals(long.class) || type.equals(Long.class)) {
+				return 1L;
+			}
+			else if (type.equals(float.class) || type.equals(Float.class)) {
+				return 1f;
+			}
+			else if (type.equals(double.class) || type.equals(Double.class)) {
+				return 1d;
+			}
+			else if (type.equals(Date.class)) {
+				return new Date();
+			}
+			throw new IllegalArgumentException("未知参数类型[" + type.getName() + "].");
 		}
 
 		protected String getUri(Method thisMethod) {
