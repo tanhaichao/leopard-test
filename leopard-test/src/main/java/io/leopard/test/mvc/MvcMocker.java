@@ -23,7 +23,7 @@ import io.leopard.autounit.CtClassUtil;
 import io.leopard.json.Json;
 import javassist.util.proxy.MethodHandler;
 
-public class MvcTester {
+public class MvcMocker {
 
 	private static MockMvc mockMvc;
 
@@ -34,7 +34,7 @@ public class MvcTester {
 	}
 
 	public static void setMockMvc(MockMvc mockMvc) {
-		MvcTester.mockMvc = mockMvc;
+		MvcMocker.mockMvc = mockMvc;
 	}
 
 	public static <T> T controller(Class<T> clazz) {
