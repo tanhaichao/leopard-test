@@ -1,7 +1,5 @@
 package io.leopard.test.mvc;
 
-import java.lang.reflect.Field;
-
 import javax.servlet.http.Cookie;
 
 import org.junit.Before;
