@@ -37,25 +37,17 @@ public class MvcMocker {
 		MvcMocker.mockMvc = mockMvc;
 	}
 
-	public static <T> T controller(Class<T> clazz) {
-		return controller(clazz, null);
+	public static <T> T mock(Class<T> clazz) {
+		return mock(clazz, null);
 	}
 
-	public static <T> T controller(Class<T> clazz, List<Cookie> cookieList) {
-		// T bean;
-		// try {
-		// bean = clazz.newInstance();
-		// }
-		// catch (Exception e) {
-		// throw new RuntimeException(e.getMessage(), e);
-		// }
+	public static <T> T mock(Class<T> clazz, List<Cookie> cookieList) {
 		T proxy = ClassProxy.newProxyInstance(clazz, new MethodHandlerImpl(cookieList));
 		return proxy;
 	}
 
 	private static class MethodHandlerImpl implements MethodHandler {
 
-		// protected final Object bean;
 		protected List<Cookie> cookieList;
 
 		public MethodHandlerImpl(List<Cookie> cookieList) {
