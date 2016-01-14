@@ -57,15 +57,12 @@ public class MvcTester {
 
 		@Override
 		public Object invoke(Object self, Method thisMethod, Method proceed, Object[] args) throws Throwable {
-			// String[] names = CtClassUtil.getParameterNames(thisMethod);
-
-			// String json = (String) thisMethod.invoke(bean, args);
-
 			String uri = this.getUri(thisMethod);
-
-			String methodName = thisMethod.getName();
-			System.out.println("methodName:" + methodName + " uri:" + uri);
 			MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(uri);
+
+			if (cookieList == null && cookieList.isEmpty()) {
+				cookieList = LoginCookieImpl.getCookies(thisMethod, args);
+			}
 
 			if (cookieList != null) {
 				for (Cookie cookie : cookieList) {
@@ -88,8 +85,7 @@ public class MvcTester {
 			String exceptionClassName = (String) map.get("exception");
 
 			Exception e = this.toException(exceptionClassName, message);
-			e.printStackTrace();
-
+			// e.printStackTrace();
 			throw e;
 		}
 
