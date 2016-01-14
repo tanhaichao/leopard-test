@@ -80,7 +80,7 @@ public class MvcTester {
 			Object data = map.get("data");
 			System.out.println("uri:" + uri + " json:" + json);
 			if ("success".equals(status)) {
-				return data;
+				return this.toResult(thisMethod, data);
 			}
 
 			String message = (String) map.get("message");
@@ -89,6 +89,12 @@ public class MvcTester {
 			Exception e = this.toException(exceptionClassName, message);
 			// e.printStackTrace();
 			throw e;
+		}
+
+		protected Object toResult(Method thisMethod, Object data) {
+			String json = Json.toJson(data);
+			Class<?> clazz = thisMethod.getReturnType();
+			return Json.toObject(json, clazz);
 		}
 
 		protected Exception toException(String className, String message) throws Throwable {
