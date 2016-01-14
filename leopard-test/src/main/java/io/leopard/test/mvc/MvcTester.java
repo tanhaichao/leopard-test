@@ -16,6 +16,9 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+
 import io.leopard.autounit.CtClassUtil;
 import io.leopard.json.Json;
 import javassist.util.proxy.MethodHandler;
@@ -23,6 +26,8 @@ import javassist.util.proxy.MethodHandler;
 public class MvcTester {
 
 	private static MockMvc mockMvc;
+
+	private static ObjectMapper mapper = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 
 	public static MockMvc getMockMvc() {
 		return mockMvc;
@@ -94,7 +99,14 @@ public class MvcTester {
 		protected Object toResult(Method thisMethod, Object data) {
 			String json = Json.toJson(data);
 			Class<?> clazz = thisMethod.getReturnType();
-			return Json.toObject(json, clazz);
+			// System.err.println("toResult clazz:" + clazz.getName());
+			// System.err.println("toResult json:" + json);
+			try {
+				return mapper.readValue(json, clazz);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
 		}
 
 		protected Exception toException(String className, String message) throws Throwable {
