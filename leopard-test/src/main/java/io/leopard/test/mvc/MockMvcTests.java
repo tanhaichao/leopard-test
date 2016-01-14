@@ -32,6 +32,7 @@ public class MockMvcTests {
 	public void setUp() {
 		new AutoUnitRunnable().run();
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+		LoginCookieImpl.setApplicationContext(wac);
 		MvcTester.setMockMvc(mockMvc);
 	}
 

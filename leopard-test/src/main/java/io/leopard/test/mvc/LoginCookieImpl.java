@@ -1,7 +1,6 @@
 package io.leopard.test.mvc;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -9,23 +8,41 @@ import java.util.Set;
 
 import javax.servlet.http.Cookie;
 
+import org.springframework.beans.BeansException;
+import org.springframework.web.context.WebApplicationContext;
+
 import io.leopard.autounit.CtClassUtil;
 
 public class LoginCookieImpl implements LoginCookie {
 
 	private static LoginCookie instance = new LoginCookieImpl();
 
+	private static LoginCookie customLoginCookie = null;
+
+	public static void setApplicationContext(WebApplicationContext wac) {
+		try {
+			customLoginCookie = wac.getBean(LoginCookie.class);
+		}
+		catch (BeansException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public List<Cookie> getCookies(Long uid) {
-		List<Cookie> cookieList = new ArrayList<Cookie>();
-
+		List<Cookie> cookieList = null;
+		if (customLoginCookie != null) {
+			cookieList = customLoginCookie.getCookies(uid);
+		}
 		return cookieList;
 	}
 
 	@Override
 	public List<Cookie> getCookies(String passport) {
-		List<Cookie> cookieList = new ArrayList<Cookie>();
-
+		List<Cookie> cookieList = null;
+		if (customLoginCookie != null) {
+			cookieList = customLoginCookie.getCookies(passport);
+		}
 		return cookieList;
 	}
 
