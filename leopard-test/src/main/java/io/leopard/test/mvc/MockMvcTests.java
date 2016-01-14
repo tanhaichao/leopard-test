@@ -24,17 +24,17 @@ import io.leopard.javahost.AutoUnitRunnable;
 public class MockMvcTests {
 
 	@Autowired
-	private WebApplicationContext wac;
+	protected WebApplicationContext wac;
 
-	private MockMvc mockMvc;
+	protected MockMvc mockMvc;
 
 	@Before
 	public void setUp() {
+		new AutoUnitRunnable().run();
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
 	protected void example() throws Exception {
-		new AutoUnitRunnable().run();
 
 		// Cookie: SESSIONID=347ab4e7-2483-4aba-b365-e9a6ca27db9f; JSESSIONID=jgrc0g2jjti979tznpl6dpm; passport=13924718422; uid=2540138; token=NTZjZmFmZTRkMTFjMjQ2NDIwZGQ0MDQ0ZGIyYjMwYWVhOTZiODA1NDoxNDUyNzk3MjIyMjk4
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/welcome.do");
