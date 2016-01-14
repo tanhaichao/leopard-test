@@ -39,10 +39,10 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>autounit</artifactId>
 		</dependency>
-		
-		
+
+
 		<!-- mvc mock -->
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -51,6 +51,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-json</artifactId>
+			<version>0.0.4-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- mvc mock -->

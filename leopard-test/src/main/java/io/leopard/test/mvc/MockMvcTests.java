@@ -32,6 +32,7 @@ public class MockMvcTests {
 	public void setUp() {
 		new AutoUnitRunnable().run();
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+		MvcTester.setMockMvc(mockMvc);
 	}
 
 	protected void example() throws Exception {
