@@ -1,5 +1,7 @@
 package io.leopard.test.mvc;
 
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 
 import org.junit.Before;
@@ -7,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -18,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import io.leopard.javahost.AutoUnitRunnable;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(MvcJUnit4ClassRunner.class)
 @WebAppConfiguration(value = "src/main/webapp")
 @ContextHierarchy({ @ContextConfiguration(name = "parent", locations = "classpath:/leopard-web/applicationContext.xml") })
 public class MvcTests {
@@ -28,14 +29,19 @@ public class MvcTests {
 
 	protected MockMvc mockMvc;
 
+	protected Date startTime;
+
 	@Before
 	public void setUp() {
+		this.startTime = new Date();
+		System.out.println("startTime:" + startTime);
 		new AutoUnitRunnable().run();
+
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 		LoginCookieImpl.setApplicationContext(wac);
 		MvcMocker.setMockMvc(mockMvc);
 
-//		this.autowired();
+		// this.autowired();
 
 	}
 
