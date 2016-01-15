@@ -93,6 +93,14 @@ public class MvcMocker {
 			Class<?> clazz = thisMethod.getReturnType();
 			// System.err.println("toResult clazz:" + clazz.getName());
 			// System.err.println("toResult json:" + json);
+			if (clazz.getName().equals("io.leopard.lang.Paging")) {
+				try {
+					clazz = Class.forName("io.leopard.lang.PagingImpl");
+				}
+				catch (ClassNotFoundException e) {
+					throw new RuntimeException(e.getMessage(), e);
+				}
+			}
 			try {
 				return mapper.readValue(json, clazz);
 			}
