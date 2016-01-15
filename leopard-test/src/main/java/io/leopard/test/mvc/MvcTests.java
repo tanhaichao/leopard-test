@@ -24,6 +24,10 @@ import io.leopard.javahost.AutoUnitRunnable;
 @ContextHierarchy({ @ContextConfiguration(name = "parent", locations = "classpath:/leopard-web/applicationContext.xml") })
 public class MvcTests {
 
+	static {
+		System.setProperty("useH2", "true");
+	}
+
 	@Autowired
 	protected WebApplicationContext wac;
 
