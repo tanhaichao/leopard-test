@@ -62,6 +62,8 @@ public class MvcMocker {
 
 			String uri = this.getUri(thisMethod);
 			MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(uri);
+			
+			MockMvcRequestBuilders.fileUpload(uri);
 
 			String[] names = CtClassUtil.getParameterNames(thisMethod);
 

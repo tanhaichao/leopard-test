@@ -1,5 +1,6 @@
 package io.leopard.test.mvc;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
+import org.springframework.web.multipart.MultipartFile;
 
 public class XParamBuilderImpl implements XParamBuilder {
 
@@ -53,10 +56,20 @@ public class XParamBuilderImpl implements XParamBuilder {
 		else if (typeName.equals(Date.class.getName())) {
 			requestBuilder.param(name, ((Date) value).getTime() + "");
 		}
+
+		else if (typeName.equals(MultipartFile.class.getName())) {
+			MultipartFile file = (MultipartFile) value;
+			try {
+				((MockMultipartHttpServletRequestBuilder) requestBuilder).file(name, file.getBytes());
+			}
+			catch (IOException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+		}
+
 		else {
 			throw new IllegalArgumentException("未知类型[" + typeName + "].");
 		}
-
 		return true;
 	}
 
