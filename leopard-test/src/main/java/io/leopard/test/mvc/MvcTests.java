@@ -1,5 +1,6 @@
 package io.leopard.test.mvc;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -38,26 +39,47 @@ public class MvcTests {
 	@Before
 	public void setUp() {
 		this.startTime = new Date();
-		System.out.println("startTime:" + startTime);
+		// System.out.println("startTime:" + startTime);
 		new AutoUnitRunnable().run();
 
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 		LoginCookieImpl.setApplicationContext(wac);
 		MvcMocker.setMockMvc(mockMvc);
 
-		// this.autowired();
-
+		this.autowired();
 	}
 
-	// protected void autowired() {
-	// Field[] fields = this.getClass().getDeclaredFields();
-	// if (fields != null) {
-	// for (Field field : fields) {
-	// System.err.println("autowired field:" + field.getName());
-	// }
-	// }
-	//
-	// }
+	protected void autowired() {
+		// = MvcMocker.mock(CollectController.class)
+
+		// System.out.println("this.getClass():" + this.getClass().getName());
+		Field[] fields = this.getClass().getDeclaredFields();
+		if (fields == null) {
+			return;
+		}
+		for (Field field : fields) {
+			Mock mock = field.getAnnotation(Mock.class);
+			if (mock == null) {
+				continue;
+			}
+			// System.err.println("autowired field:" + field.getName() + " type:" + field.getType().getName());
+
+			Class<?> type = field.getType();
+			Object value = MvcMocker.mock(type);
+			field.setAccessible(true);
+			try {
+				field.set(this, value);
+			}
+			catch (IllegalArgumentException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+			catch (IllegalAccessException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+			// System.err.println("autowired field:" + field.getName());
+		}
+
+	}
 
 	protected void example() throws Exception {
 
