@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.util.StringUtils;
 
 public class XParamBuilderImpl implements XParamBuilder {
 
@@ -36,7 +35,7 @@ public class XParamBuilderImpl implements XParamBuilder {
 		name = camelToUnderline(name);
 
 		if (typeName.equals(String.class.getName())) {
-			System.err.println("requestBuilder param name:" + name + " value:" + value);
+			// System.err.println("requestBuilder param name:" + name + " value:" + value);
 			requestBuilder.param(name, (String) value);
 		}
 		else if (typeName.equals(int.class.getName()) || typeName.equals(Integer.class.getName())) {
