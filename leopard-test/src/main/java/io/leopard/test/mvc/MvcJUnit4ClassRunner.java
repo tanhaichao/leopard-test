@@ -16,7 +16,7 @@ public class MvcJUnit4ClassRunner extends SpringJUnit4ClassRunner {
 			useH2 = anno.value();
 		}
 		System.setProperty("useH2", Boolean.toString(useH2));
-		System.out.println("useH2:" + Boolean.toString(useH2));
+		System.out.println("MvcJUnit4ClassRunner useH2:" + Boolean.toString(useH2));
 	}
 
 }
