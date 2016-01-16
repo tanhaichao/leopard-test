@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.util.StringUtils;
 
 public class XParamBuilderImpl implements XParamBuilder {
 
@@ -31,6 +32,8 @@ public class XParamBuilderImpl implements XParamBuilder {
 			return xParamBuilderSessionIdImpl.param(requestBuilder, index, name, value, type);
 		}
 		String typeName = type.getTypeName();
+
+		name = camelToUnderline(name);
 
 		if (typeName.equals(String.class.getName())) {
 			System.err.println("requestBuilder param name:" + name + " value:" + value);
@@ -58,4 +61,25 @@ public class XParamBuilderImpl implements XParamBuilder {
 		return true;
 	}
 
+	/**
+	 * 将驼峰式命名的字符串转换为下划线方式.
+	 */
+	public static String camelToUnderline(String param) {
+		if (param == null || param.length() == 0) {
+			return param;
+		}
+		int len = param.length();
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++) {
+			char c = param.charAt(i);
+			if (Character.isUpperCase(c)) {
+				sb.append('_');
+				sb.append(Character.toLowerCase(c));
+			}
+			else {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
 }
