@@ -68,13 +68,20 @@ public class XParamBuilderImpl implements XParamBuilder {
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
-		else if (typeName.equals("java.util.List<java.lang.String>")) {
-			@SuppressWarnings("unchecked")
-			List<String> list = (List<String>) value;
-			if (list != null) {
-				for (String element : list) {
-					requestBuilder.param(name, element);
+		else if (type.equals(List.class)) {
+			if (typeName.equals("java.util.List<java.lang.String>")) {
+				@SuppressWarnings("unchecked")
+				List<String> list = (List<String>) value;
+				if (list != null) {
+					String name2 = name.replace("_list", "");
+					for (String element : list) {
+						requestBuilder.param(name2, element);
+						// System.err.println("param name:" + name2 + " element:" + element);
+					}
 				}
+			}
+			else {
+				throw new IllegalArgumentException("未知List类型[" + typeName + "].");
 			}
 		}
 		else {
