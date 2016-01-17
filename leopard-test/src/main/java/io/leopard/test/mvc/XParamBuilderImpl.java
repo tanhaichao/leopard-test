@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.leopard.burrow.lang.inum.Snum;
+
 public class XParamBuilderImpl implements XParamBuilder {
 
 	private XParamBuilderPassportImpl xParamBuilderPassportImpl;
@@ -66,9 +68,27 @@ public class XParamBuilderImpl implements XParamBuilder {
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
-
 		else {
-			throw new IllegalArgumentException("未知类型[" + typeName + "].");
+			Class<?> clazz;
+			try {
+				clazz = Class.forName(typeName);
+			}
+			catch (ClassNotFoundException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
+
+			if (clazz.isEnum()) {
+				if (clazz.isAssignableFrom(Snum.class)) {
+					String key = ((Snum) value).getKey();
+					requestBuilder.param(name, key);
+				}
+				else {
+					throw new IllegalArgumentException("未知枚举类型[" + typeName + "].");
+				}
+			}
+			else {
+				throw new IllegalArgumentException("未知类型[" + typeName + "].");
+			}
 		}
 		return true;
 	}
