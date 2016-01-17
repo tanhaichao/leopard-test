@@ -35,7 +35,7 @@ public class XParamBuilderImpl implements XParamBuilder {
 		else if ("sessionId".equals(name)) {
 			return xParamBuilderSessionIdImpl.param(requestBuilder, index, name, value, type, genericType);
 		}
-		String typeName = type.getTypeName();
+		String typeName = genericType.getTypeName();
 
 		name = camelToUnderline(name);
 
@@ -68,8 +68,14 @@ public class XParamBuilderImpl implements XParamBuilder {
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
-		else if (type.equals(List.class)) {
-			// requestBuilder.param(name, ((Date) value).getTime() + "");
+		else if (typeName.equals("java.util.List<java.lang.String>")) {
+			@SuppressWarnings("unchecked")
+			List<String> list = (List<String>) value;
+			if (list != null) {
+				for (String element : list) {
+					requestBuilder.param(name, element);
+				}
+			}
 		}
 		else {
 			Class<?> clazz;
