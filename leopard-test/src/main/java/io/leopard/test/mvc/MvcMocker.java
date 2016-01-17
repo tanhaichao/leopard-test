@@ -67,9 +67,9 @@ public class MvcMocker {
 
 			String[] names = CtClassUtil.getParameterNames(thisMethod);
 
-			Type[] types = thisMethod.getGenericParameterTypes();
+			Type[] genericTypes = thisMethod.getGenericParameterTypes();
 
-			new XParamBuilderImpl(requestBuilder, names, args, types, cookieList);
+			new XParamBuilderImpl(requestBuilder, names, args, thisMethod.getParameterTypes(), genericTypes, cookieList);
 
 			MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 			String json = result.getResponse().getContentAsString();

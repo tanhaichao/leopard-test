@@ -16,7 +16,7 @@ public class XParamBuilderPassportImpl implements XParamBuilder {
 	}
 
 	@Override
-	public boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Type type) {
+	public boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Class<?> type, Type genericType) {
 		List<Cookie> cookieList = this.cookieList;
 
 		if (cookieList == null || cookieList.isEmpty()) {

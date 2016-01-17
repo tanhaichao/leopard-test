@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 public class XParamBuilderSessionIdImpl implements XParamBuilder {
 
 	@Override
-	public boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Type type) {
+	public boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Class<?> type, Type genericType) {
 		requestBuilder.cookie(new Cookie("sessionId", (String) value));
 		return true;
 	}

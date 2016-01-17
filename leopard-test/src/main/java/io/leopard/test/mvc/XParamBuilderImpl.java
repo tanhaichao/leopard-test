@@ -19,21 +19,21 @@ public class XParamBuilderImpl implements XParamBuilder {
 
 	private XParamBuilderSessionIdImpl xParamBuilderSessionIdImpl = new XParamBuilderSessionIdImpl();
 
-	public XParamBuilderImpl(MockHttpServletRequestBuilder requestBuilder, String[] names, Object[] args, Type[] types, List<Cookie> cookieList) {
+	public XParamBuilderImpl(MockHttpServletRequestBuilder requestBuilder, String[] names, Object[] args, Class<?>[] types, Type[] genericTypes, List<Cookie> cookieList) {
 		xParamBuilderPassportImpl = new XParamBuilderPassportImpl(cookieList);
 
 		for (int i = 0; i < args.length; i++) {
-			this.param(requestBuilder, i, names[i], args[i], types[i]);
+			this.param(requestBuilder, i, names[i], args[i], types[i], genericTypes[i]);
 		}
 	}
 
 	@Override
-	public boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Type type) {
+	public boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Class<?> type, Type genericType) {
 		if ("sessUid".equals(name) || "sessUsername".equals(name) || "sessPassport".equals(name)) {
-			return xParamBuilderPassportImpl.param(requestBuilder, index, name, value, type);
+			return xParamBuilderPassportImpl.param(requestBuilder, index, name, value, type, genericType);
 		}
 		else if ("sessionId".equals(name)) {
-			return xParamBuilderSessionIdImpl.param(requestBuilder, index, name, value, type);
+			return xParamBuilderSessionIdImpl.param(requestBuilder, index, name, value, type, genericType);
 		}
 		String typeName = type.getTypeName();
 
@@ -68,6 +68,9 @@ public class XParamBuilderImpl implements XParamBuilder {
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
+		else if (type.equals(List.class)) {
+			// requestBuilder.param(name, ((Date) value).getTime() + "");
+		}
 		else {
 			Class<?> clazz;
 			try {
@@ -78,7 +81,7 @@ public class XParamBuilderImpl implements XParamBuilder {
 			}
 
 			if (clazz.isEnum()) {
-				if (clazz.isAssignableFrom(Snum.class)) {
+				if (Snum.class.isAssignableFrom(clazz)) {
 					String key = ((Snum) value).getKey();
 					requestBuilder.param(name, key);
 				}

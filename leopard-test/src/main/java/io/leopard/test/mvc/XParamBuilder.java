@@ -6,5 +6,5 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 public interface XParamBuilder {
 
-	boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Type type);
+	boolean param(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Class<?> type, Type genericType);
 }
