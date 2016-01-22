@@ -68,6 +68,9 @@ public class XParamBuilderImpl implements XParamBuilder {
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
+		else if (value instanceof Snum) {
+			requestBuilder.param(name, ((Snum) value).getKey());
+		}
 		else if (type.equals(List.class)) {
 			if (typeName.equals("java.util.List<java.lang.String>")) {
 				@SuppressWarnings("unchecked")
@@ -85,26 +88,7 @@ public class XParamBuilderImpl implements XParamBuilder {
 			}
 		}
 		else {
-			Class<?> clazz;
-			try {
-				clazz = Class.forName(typeName);
-			}
-			catch (ClassNotFoundException e) {
-				throw new RuntimeException(e.getMessage(), e);
-			}
-
-			if (clazz.isEnum()) {
-				if (Snum.class.isAssignableFrom(clazz)) {
-					String key = ((Snum) value).getKey();
-					requestBuilder.param(name, key);
-				}
-				else {
-					throw new IllegalArgumentException("未知枚举类型[" + typeName + "].");
-				}
-			}
-			else {
-				throw new IllegalArgumentException("未知类型[" + typeName + "].");
-			}
+			throw new IllegalArgumentException("未知类型[" + typeName + "].");
 		}
 		return true;
 	}
