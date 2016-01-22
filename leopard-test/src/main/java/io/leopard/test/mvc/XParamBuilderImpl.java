@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequ
 import org.springframework.web.multipart.MultipartFile;
 
 import io.leopard.burrow.lang.inum.Snum;
+import io.leopard.json.Json;
 
 public class XParamBuilderImpl implements XParamBuilder {
 
@@ -72,25 +73,46 @@ public class XParamBuilderImpl implements XParamBuilder {
 			requestBuilder.param(name, ((Snum) value).getKey());
 		}
 		else if (type.equals(List.class)) {
-			if (typeName.equals("java.util.List<java.lang.String>")) {
-				@SuppressWarnings("unchecked")
-				List<String> list = (List<String>) value;
-				if (list != null) {
-					String name2 = name.replace("_list", "");
-					for (String element : list) {
-						requestBuilder.param(name2, element);
-						// System.err.println("param name:" + name2 + " element:" + element);
-					}
-				}
-			}
-			else {
-				throw new IllegalArgumentException("未知List类型[" + typeName + "].");
-			}
+			this.list(requestBuilder, index, typeName, value, type, genericType);
 		}
 		else {
 			throw new IllegalArgumentException("未知类型[" + typeName + "].");
 		}
 		return true;
+	}
+
+	public void list(MockHttpServletRequestBuilder requestBuilder, int index, String name, Object value, Class<?> type, Type genericType) {
+		String typeName = genericType.getTypeName();
+		if (value == null) {
+			return;
+		}
+		String name2 = name.replace("_list", "");
+		if (typeName.equals("java.util.List<java.lang.String>")) {
+			@SuppressWarnings("unchecked")
+			List<String> list = (List<String>) value;
+			for (String element : list) {
+				requestBuilder.param(name2, element);
+			}
+		}
+		else if (typeName.equals("java.util.List<java.lang.Integer>")) {
+			@SuppressWarnings("unchecked")
+			List<Integer> list = (List<Integer>) value;
+			for (Integer element : list) {
+				requestBuilder.param(name2, Integer.toString(element));
+			}
+		}
+		else if (typeName.equals("java.util.List<java.lang.Long>")) {
+			@SuppressWarnings("unchecked")
+			List<Long> list = (List<Long>) value;
+			for (Long element : list) {
+				requestBuilder.param(name2, Long.toString(element));
+			}
+		}
+		else {
+			String json = Json.toJson(value);
+			requestBuilder.param(name2, json);
+		}
+		// throw new IllegalArgumentException("未知List类型[" + typeName + "].");
 	}
 
 	/**
