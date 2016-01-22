@@ -73,7 +73,7 @@ public class XParamBuilderImpl implements XParamBuilder {
 			requestBuilder.param(name, ((Snum) value).getKey());
 		}
 		else if (type.equals(List.class)) {
-			this.list(requestBuilder, index, typeName, value, type, genericType);
+			this.list(requestBuilder, index, name, value, type, genericType);
 		}
 		else {
 			throw new IllegalArgumentException("未知类型[" + typeName + "].");
@@ -111,6 +111,7 @@ public class XParamBuilderImpl implements XParamBuilder {
 		else {
 			String json = Json.toJson(value);
 			requestBuilder.param(name2, json);
+			System.err.println("name2:" + name2 + " jsonjsonjsonjson:" + json);
 		}
 		// throw new IllegalArgumentException("未知List类型[" + typeName + "].");
 	}
