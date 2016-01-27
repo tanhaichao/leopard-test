@@ -6,6 +6,7 @@ import org.junit.runners.model.InitializationError;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.leopard.jdbc.UseH2;
+import io.leopard.jdbc.test.DefaultH2DataSource;
 
 public class IntegrationRunner extends SpringJUnit4ClassRunner {
 
@@ -15,7 +16,10 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 		UseH2 anno = clazz.getAnnotation(UseH2.class);
 		if (anno != null) {
 			boolean useH2 = anno.value();
-			System.setProperty("useH2", Boolean.toString(useH2));
+			// System.setProperty("useH2", Boolean.toString(useH2));
+
+			DefaultH2DataSource.setUseH2(useH2, "integration", false);
+			// DefaultH2DataSource.setCategory(autoCommit);
 		}
 	}
 
