@@ -2,10 +2,14 @@ package io.leopard.test;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+
+import io.leopard.autounit.unitdb.H2Util;
+import io.leopard.jdbc.test.DefaultH2DataSource;
 
 /**
  * 集成测试基础类(用于开发阶段测试完整流程).
@@ -20,7 +24,6 @@ public class IntegrationTests extends AbstractJUnit4SpringContextTests {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	
 	// /** 默认username:username */
 	// public String username = "username";
 	//
@@ -46,5 +49,13 @@ public class IntegrationTests extends AbstractJUnit4SpringContextTests {
 	// public String ANY_STR = "any";
 	//
 	// public int ANY_INT = 8888;
+
+	@AfterClass
+	public static void leave() {
+		boolean useH2 = DefaultH2DataSource.isUseH2();
+		if (useH2) {
+			H2Util.cleanDir("integration");
+		}
+	}
 
 }
