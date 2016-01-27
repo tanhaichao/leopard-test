@@ -5,11 +5,18 @@ import java.util.List;
 import org.junit.runners.model.InitializationError;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import io.leopard.jdbc.UseH2;
+
 public class IntegrationRunner extends SpringJUnit4ClassRunner {
 
 	public IntegrationRunner(Class<?> clazz) throws InitializationError {
 		super(clazz);
 
+		UseH2 anno = clazz.getAnnotation(UseH2.class);
+		if (anno != null) {
+			boolean useH2 = anno.value();
+			System.setProperty("useH2", Boolean.toString(useH2));
+		}
 	}
 
 	@Override
