@@ -18,7 +18,7 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 			boolean useH2 = anno.value();
 			// System.setProperty("useH2", Boolean.toString(useH2));
 
-			DefaultH2DataSource.setUseH2(useH2, "integration", false);
+			DefaultH2DataSource.setUseH2(useH2, "integration", true);
 			// DefaultH2DataSource.setCategory(autoCommit);
 		}
 	}
