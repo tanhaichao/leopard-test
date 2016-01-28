@@ -54,7 +54,9 @@ public class IntegrationTests extends AbstractJUnit4SpringContextTests {
 	public static void leave() {
 		boolean useH2 = DefaultH2DataSource.isUseH2();
 		if (useH2) {
-			H2Util.cleanDir("integration");
+			if (!DefaultH2DataSource.isAutoCommit()) {
+				H2Util.cleanDir("integration");
+			}
 		}
 	}
 
