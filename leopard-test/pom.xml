@@ -6,9 +6,8 @@
 		<version>0.0.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-test</artifactId>
-
-
-	<name>测试包</name>
+	<name>测试类库</name>
+	<description>集成测试、单元测试时，不需要为测试做任何额外的Spring相关配置。</description>
 
 	<dependencies>
 		<dependency>
