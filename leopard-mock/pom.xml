@@ -6,8 +6,8 @@
 		<version>0.0.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-mock</artifactId>
-
-
+	<name>Leopard-Mock</name>
+	<description>规范、简化Mock代码编写。提供自动属性Mock功能。</description>
 
 
 	<dependencies>
