@@ -4,6 +4,8 @@
 	<artifactId>leopard-test-parent</artifactId>
 	<version>0.0.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>Leopard-Test</name>
+	<description>测试类库</description>
 
 	<parent>
 		<groupId>io.leopard.depend</groupId>

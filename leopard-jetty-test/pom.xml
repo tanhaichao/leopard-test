@@ -7,7 +7,7 @@
 	</parent>
 	<artifactId>leopard-jetty-test</artifactId>
 	<name>Leopard-Jetty-Test</name>
-	<description>提供启动Jetty、访问Http接口、停止Jetty的类库，简化经过Jetty的接口单元测试。目前多用于Leopard各设计web的模块，业务系统一般情况下不需要使用。</description>
+	<description>提供启动Jetty、访问Http接口、停止Jetty的类库，简化经过Jetty的接口单元测试。目前多用于Leopard各设计web的模块，业务系统有MVCUnit，一般情况下不需要用到Leopard-Jetty-Test。</description>
 
 	<dependencies>
 		<!-- test -->
