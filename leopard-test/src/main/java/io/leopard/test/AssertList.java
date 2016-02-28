@@ -5,10 +5,12 @@ import java.util.List;
 import org.junit.Assert;
 
 import io.leopard.burrow.refect.FieldUtil;
+import io.leopard.json.Json;
 
 public class AssertList {
 
 	public static void assertContainsKey(String fieldName, Object value, List<?> list) {
+		Json.printList(list, "list");
 		boolean contains = false;
 		for (Object element : list) {
 			Object tmp = FieldUtil.getFieldValue(element, fieldName);
@@ -18,7 +20,7 @@ public class AssertList {
 			}
 		}
 		if (!contains) {
-			Assert.fail("元素不存在.");
+			Assert.fail("元素[" + fieldName + "." + value + "]不存在.");
 		}
 	}
 }
