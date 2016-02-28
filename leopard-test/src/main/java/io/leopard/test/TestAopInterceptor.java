@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 
 /**
@@ -47,9 +48,10 @@ public class TestAopInterceptor extends BeanNameAutoProxyCreator implements Meth
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-
-		String className = invocation.getThis().getClass().getName();
-		logger.info("TestAopInterceptor invoke className:" + className + " method:" + invocation.getMethod().toGenericString());
+		// String className = invocation.getThis().getClass().getName();
+		Object[] args = invocation.getArguments();
+		String params = StringUtils.join(args, ",");
+		logger.info("TestAopInterceptor invoke method:" + invocation.getMethod().toGenericString() + " params:" + params);
 		Object result = invocation.proceed();
 		return result;
 	}
