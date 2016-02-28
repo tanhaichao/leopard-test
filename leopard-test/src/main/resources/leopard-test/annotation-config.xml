@@ -7,5 +7,5 @@
 	<context:annotation-config />
 
 
-	<bean class="io.leopard.test.TestAopInterceptor" />
+	<bean id="testAopInterceptor" class="io.leopard.test.TestAopInterceptor" />
 </beans>
