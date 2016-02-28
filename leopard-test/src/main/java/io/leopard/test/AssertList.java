@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import io.leopard.burrow.refect.FieldUtil;
+import io.leopard.lang.util.FieldUtil;
 
 public class AssertList {
 

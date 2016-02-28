@@ -45,5 +45,25 @@
 			<artifactId>leopard-jdbc</artifactId>
 			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-lang</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-util</artifactId>
+			<version>0.0.4-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- mvc mock -->
+
 	</dependencies>
 </project>
