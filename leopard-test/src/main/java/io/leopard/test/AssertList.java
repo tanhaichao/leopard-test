@@ -14,7 +14,8 @@ public class AssertList {
 		boolean contains = false;
 		for (Object element : list) {
 			Object tmp = FieldUtil.getFieldValue(element, fieldName);
-			if (tmp.equals(value)) {
+			// System.out.println("tmp:" + tmp + " value:" + value);
+			if (tmp.toString().equals(value.toString())) {// TODO ahai 未完整实现
 				contains = true;
 				break;
 			}
