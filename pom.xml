@@ -42,4 +42,12 @@
 		<module>leopard-mock</module>
 		<module>leopard-jetty-test</module>
 	</modules>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>http://leopard.io/nexus/content/repositories/framework-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
