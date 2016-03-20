@@ -36,7 +36,7 @@
 
 		<dependency>
 			<groupId>io.leopard</groupId>
-			<artifactId>autounit</artifactId>
+			<artifactId>autounit-core</artifactId>
 		</dependency>
 
 
