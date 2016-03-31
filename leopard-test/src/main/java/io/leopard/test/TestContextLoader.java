@@ -20,12 +20,11 @@ public class TestContextLoader implements ContextLoader {
 	@Override
 	public ApplicationContext loadContext(String... locations) throws Exception {
 
-		try {
-			AutoUnitInitializer.init();
-		}
-		catch (NoClassDefFoundError e) {
-			// throw new RuntimeException(e.getMessage(), e);
-		}
+		// try {
+		// AutoUnitInitializer.init();
+		// }
+		// catch (NoClassDefFoundError e) {
+		// }
 
 		if (locations.length == 0) {
 			locations = new ApplicationContextLocationImpl().get();
