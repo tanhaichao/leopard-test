@@ -6,9 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan
+@ComponentScan(value = "io.leopard.tomcat")
 @EnableAutoConfiguration
 public class Application {
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class);
 	}
