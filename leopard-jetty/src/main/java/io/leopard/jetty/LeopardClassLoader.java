@@ -15,7 +15,7 @@ public class LeopardClassLoader extends WebAppClassLoader {
 
 	@Override
 	protected Class<?> findClass(String name) throws ClassNotFoundException {
-		logger.info("findClass:" + name);
+		// logger.info("findClass:" + name);
 		return super.findClass(name);
 	}
 
