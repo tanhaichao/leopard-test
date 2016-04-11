@@ -14,25 +14,20 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 	protected void addTldResource(final WebAppContext context, Resource resource, String name) throws IOException {
 		Resource tldResource = resource.getResource(name);
 		if (tldResource.exists()) {
-			// System.err.println("tldResource:" + tldResource);
-			// addResource(context, METAINF_TLDS, Resource.newResource(tldResource.getURL()));
-			addResource(context, METAINF_TLDS, tldResource);
+			// addResource(context, METAINF_TLDS, tldResource);
 		}
 	}
 
 	protected void addFolderResource(final WebAppContext context) throws IOException {
 		for (Resource resource : context.getMetaData().getWebInfJars()) {
 			String url = resource.toString();
-			// if (!url.endsWith(".jar")) {
-			// System.err.println("url:" + url);
-			// }
 			if (!isClassesDir(url)) {
 				continue;
 			}
 			{
 				Resource fragmentResource = resource.getResource("META-INF/web-fragment.xml");
 				if (fragmentResource.exists()) {
-					addResource(context, METAINF_FRAGMENTS, resource);
+					// addResource(context, METAINF_FRAGMENTS, resource);
 				}
 			}
 
@@ -48,7 +43,7 @@ public class EmbedMetaInfConfiguration extends MetaInfConfiguration {
 	@Override
 	public void preConfigure(final WebAppContext context) throws Exception {
 		// LOG.info("preConfigure");
-		this.addFolderResource(context);
+		// this.addFolderResource(context);
 		super.preConfigure(context);
 	}
 

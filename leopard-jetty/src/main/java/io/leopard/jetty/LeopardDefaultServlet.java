@@ -32,6 +32,10 @@ public class LeopardDefaultServlet extends DefaultServlet {
 		Field field = DefaultServlet.class.getDeclaredField("_cache");
 		field.setAccessible(true);
 		ResourceCache cache = (ResourceCache) field.get(this);
-		cache.setUseFileMappedBuffer(false);
+		Field bufferField = ResourceCache.class.getDeclaredField("_useFileMappedBuffer");
+		bufferField.setAccessible(true);
+		bufferField.set(cache, false);
+		// _useFileMappedBuffer
+		// cache.
 	}
 }
