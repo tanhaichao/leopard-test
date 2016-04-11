@@ -10,18 +10,26 @@ import org.eclipse.jetty.annotations.AbstractDiscoverableAnnotationHandler;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.annotations.AnnotationParser;
 import org.eclipse.jetty.annotations.ClassNameResolver;
+import org.eclipse.jetty.util.log.Log;
+import org.eclipse.jetty.util.log.Logger;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
- * 解决jetty自带的AnnotationConfiguration只扫描WEB-INF/classes的问题，maven编译后的目录为target，
- * 不符合其规则
+ * 解决jetty自带的AnnotationConfiguration只扫描WEB-INF/classes的问题，maven编译后的目录为target， 不符合其规则
  * 
  * @author dw_lixuan
  * @version version1
  * @since 2013-02-18
  */
 public class EmbedAnnotionConfiguration extends AnnotationConfiguration {
+	protected static final Logger LOG = Log.getLogger(EmbedAnnotionConfiguration.class);
+
+	@Override
+	public void preConfigure(WebAppContext context) throws Exception {
+		// LOG.info("preConfigure");
+		super.preConfigure(context);
+	}
 
 	@Override
 	public void parseContainerPath(final WebAppContext context, final AnnotationParser parser) throws Exception {
@@ -80,7 +88,6 @@ public class EmbedAnnotionConfiguration extends AnnotationConfiguration {
 				return;
 			}
 
-			
 			parser.clearHandlers();
 			for (AnnotationParser.DiscoverableAnnotationHandler h : _discoverableAnnotationHandlers) {
 				if (h instanceof AbstractDiscoverableAnnotationHandler) {

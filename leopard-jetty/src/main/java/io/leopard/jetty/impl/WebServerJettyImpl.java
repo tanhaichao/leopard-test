@@ -1,12 +1,5 @@
 package io.leopard.jetty.impl;
 
-import io.leopard.jetty.ServerInitializer;
-import io.leopard.jetty.configuration.EmbedAnnotionConfiguration;
-import io.leopard.jetty.configuration.EmbedFragmentConfiguration;
-import io.leopard.jetty.configuration.EmbedMetaInfConfiguration;
-import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
-import io.leopard.jetty.configuration.EmbedWebXmlConfiguration;
-
 import java.io.IOException;
 import java.net.BindException;
 
@@ -14,6 +7,14 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
+
+import io.leopard.jetty.LeopardClassLoader;
+import io.leopard.jetty.ServerInitializer;
+import io.leopard.jetty.configuration.EmbedAnnotionConfiguration;
+import io.leopard.jetty.configuration.EmbedFragmentConfiguration;
+import io.leopard.jetty.configuration.EmbedMetaInfConfiguration;
+import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
+import io.leopard.jetty.configuration.EmbedWebXmlConfiguration;
 
 public class WebServerJettyImpl extends AbstractWebServer {
 
@@ -35,18 +36,18 @@ public class WebServerJettyImpl extends AbstractWebServer {
 		// 问题点：http://stackoverflow.com/questions/13222071/spring-3-1-webapplicationinitializer-embedded-jetty-8-annotationconfiguration
 		webContext.setConfigurations(new Configuration[] { //
 				new EmbedWebInfConfiguration()//
-						, new EmbedWebXmlConfiguration()//
-						, new EmbedMetaInfConfiguration()//
-						, new EmbedFragmentConfiguration()//
-						, new EmbedAnnotionConfiguration() //
+				, new EmbedWebXmlConfiguration()//
+				, new EmbedMetaInfConfiguration()//
+				, new EmbedFragmentConfiguration()//
+				, new EmbedAnnotionConfiguration() //
 				// , new PlusConfiguration(),//
 				// new EnvConfiguration()//
-				});
+		});
 
 		WebAppClassLoader classLoader = null;
 		try {
 			// addTldLib(webContext);
-			classLoader = new WebAppClassLoader(webContext);
+			classLoader = new LeopardClassLoader(webContext);
 		}
 		catch (IOException e) {
 			e.printStackTrace();

@@ -7,6 +7,8 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jetty.util.log.Log;
+import org.eclipse.jetty.util.log.Logger;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
@@ -19,6 +21,7 @@ import org.eclipse.jetty.webapp.WebInfConfiguration;
  * @since 2013-02-18
  */
 public class EmbedWebInfConfiguration extends WebInfConfiguration {
+	protected static final Logger LOG = Log.getLogger(EmbedWebInfConfiguration.class);
 
 	@Override
 	protected List<Resource> findJars(WebAppContext context) throws Exception {
