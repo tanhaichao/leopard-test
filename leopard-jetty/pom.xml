@@ -10,14 +10,11 @@
 	<description>通过main方法嵌入式运行Jetty，整个Eclipse工作区的工程代码修改后不需要打包即可生效。</description>
 
 	<properties>
-<jetty.version>9.3.6.v20151106</jetty.version>
+		<jetty.version>9.3.6.v20151106</jetty.version>
 		<jetty.jsp.version>9.2.14.v20151106</jetty.jsp.version>
-		
-		
-		<!-- 
-		<jetty.version>8.1.10.v20130312</jetty.version>
-		<jetty.jsp.version>8.1.10.v20130312</jetty.jsp.version>
-		 -->
+
+
+		<!-- <jetty.version>8.1.10.v20130312</jetty.version> <jetty.jsp.version>8.1.10.v20130312</jetty.jsp.version> -->
 	</properties>
 
 	<dependencies>
@@ -62,7 +59,7 @@
 			</exclusions>
 		</dependency>
 
-	<dependency>
+		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
 			<version>5.0.3</version>
@@ -81,6 +78,10 @@
 				<exclusion>
 					<artifactId>javax.servlet</artifactId>
 					<groupId>org.eclipse.jetty.orbit</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>javax.el</artifactId>
+					<groupId>org.glassfish</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
