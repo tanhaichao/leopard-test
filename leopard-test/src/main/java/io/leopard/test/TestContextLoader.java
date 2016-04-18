@@ -19,12 +19,15 @@ public class TestContextLoader implements ContextLoader {
 
 	@Override
 	public ApplicationContext loadContext(String... locations) throws Exception {
-
-		// try {
-		// AutoUnitInitializer.init();
-		// }
-		// catch (NoClassDefFoundError e) {
-		// }
+		String className = "io.leopard.javahost.AutoUnitRunnable";
+		try {
+			Runnable runnable = (Runnable) Class.forName(className).newInstance();
+			runnable.run();
+		}
+		catch (Exception e) {
+			// System.err.println("init hosts error:" + e.toString());
+			// e.printStackTrace();
+		}
 
 		if (locations.length == 0) {
 			locations = new ApplicationContextLocationImpl().get();

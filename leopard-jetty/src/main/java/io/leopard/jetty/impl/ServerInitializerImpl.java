@@ -7,7 +7,6 @@ public class ServerInitializerImpl implements ServerInitializer {
 	@Override
 	public void run() {
 		String className = "io.leopard.javahost.AutoUnitRunnable";
-		// "io.leopard.test.hosts.HostLeiImpl";
 		try {
 			Runnable runnable = (Runnable) Class.forName(className).newInstance();
 			runnable.run();
