@@ -9,12 +9,23 @@
 
 
 	<dependencies>
-		<dependency>
-			<groupId>org.mortbay.jasper</groupId>
-			<artifactId>apache-jsp</artifactId>
-			<version>8.0.33</version>
-		</dependency>
+		<!-- <dependency> <groupId>org.mortbay.jasper</groupId> <artifactId>apache-jsp</artifactId> <version>8.0.33</version> </dependency> -->
 
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>apache-jsp</artifactId>
+			<version>9.3.9.v20160517</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>apache-jstl</artifactId>
+			<version>9.3.9.v20160517</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-start</artifactId>
+			<version>9.3.9.v20160517</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.taglibs</groupId>
 			<artifactId>taglibs-standard-impl</artifactId>
