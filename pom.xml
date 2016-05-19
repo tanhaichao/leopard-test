@@ -41,6 +41,7 @@
 		<module>leopard-mock</module>
 		<module>leopard-jetty-test</module>
 		<module>leopard-tomcat</module>
+		<module>leopard-jetty-jsp</module>
 	</modules>
 	
 </project>
