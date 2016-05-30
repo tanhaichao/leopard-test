@@ -36,6 +36,12 @@ public abstract class AbstractWebServer implements WebServer {
 	 * @throws BindException
 	 */
 	protected int getAutoPort(int port) throws BindException {
+		if (System.getProperty("os.name").startsWith("Mac")) {
+			if (port == 80) {
+				port = 8080;
+			}
+			return port;
+		}
 		try {
 			checkOpened(port);
 		}
