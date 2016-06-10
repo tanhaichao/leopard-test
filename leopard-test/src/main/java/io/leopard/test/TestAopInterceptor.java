@@ -51,7 +51,7 @@ public class TestAopInterceptor extends BeanNameAutoProxyCreator implements Meth
 		// String className = invocation.getThis().getClass().getName();
 		Object[] args = invocation.getArguments();
 		String params = StringUtils.join(args, ",");
-//		logger.info("TestAopInterceptor invoke method:" + invocation.getMethod().toGenericString() + " params:" + params);
+		logger.info("TestAopInterceptor invoke method:" + invocation.getMethod().toGenericString() + " params:" + params);
 		Object result = invocation.proceed();
 		return result;
 	}
