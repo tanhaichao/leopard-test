@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>io.leopard.depend</groupId>
 		<artifactId>depend</artifactId>
-		<version>0.5</version>
+		<version>0.6</version>
 	</parent>
 
 	<scm>
@@ -25,13 +25,22 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>javahost</artifactId>
-				<version>0.3</version>
+				<version>0.8</version>
 			</dependency>
-
 			<dependency>
 				<groupId>io.leopard</groupId>
-				<artifactId>autounit-core</artifactId>
-				<version>0.3-SNAPSHOT</version>
+				<artifactId>leopard-jdbc</artifactId>
+				<version>0.8</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-lang</artifactId>
+				<version>0.8</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-util</artifactId>
+				<version>0.8</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -43,5 +52,5 @@
 		<module>leopard-tomcat</module>
 		<module>leopard-jetty-jsp</module>
 	</modules>
-	
+
 </project>
