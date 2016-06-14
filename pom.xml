@@ -19,23 +19,26 @@
 		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-test/trunk</developerConnection>
 	</scm>
 
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>javahost</artifactId>
-				<version>0.8</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jdbc</artifactId>
-				<version>0.8</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-util</artifactId>
-				<version>0.8</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
