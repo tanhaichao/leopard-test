@@ -16,12 +16,13 @@ import org.springframework.mock.web.MockMultipartFile;
  */
 public class LocalMultipartFile extends MockMultipartFile {
 
-	
 	public LocalMultipartFile(String path) throws IOException {
 		super(path, readFile(path));
 	}
 
 	protected static InputStream readFile(String path) throws FileNotFoundException {
-		return new FileInputStream(new File(path));
+		File file = new File(path);
+		System.err.println("file:" + file.exists());
+		return new FileInputStream(file);
 	}
 }
