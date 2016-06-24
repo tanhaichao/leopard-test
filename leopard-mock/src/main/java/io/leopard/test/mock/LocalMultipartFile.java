@@ -22,7 +22,7 @@ public class LocalMultipartFile extends MockMultipartFile {
 
 	protected static InputStream readFile(String path) throws FileNotFoundException {
 		File file = new File(path);
-		System.err.println("file:" + file.exists());
+		// System.err.println("file:" + file.exists());
 		return new FileInputStream(file);
 	}
 }
