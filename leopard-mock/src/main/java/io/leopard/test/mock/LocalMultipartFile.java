@@ -1,4 +1,4 @@
-package io.leopard.test;
+package io.leopard.test.mock;
 
 import java.io.File;
 import java.io.FileInputStream;
