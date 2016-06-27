@@ -6,7 +6,10 @@ import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 /**
  * 集成测试基础类(用于开发阶段测试完整流程).
@@ -16,6 +19,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  */
 @ContextConfiguration(loader = TestContextLoader.class)
 @ActiveProfiles(value = "dev", inheritProfiles = false)
+@TestExecutionListeners({ TransactionalTestExecutionListener.class, SqlScriptsTestExecutionListener.class })
 @RunWith(IntegrationRunner.class)
 public class IntegrationTests extends AbstractJUnit4SpringContextTests {
 

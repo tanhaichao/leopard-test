@@ -37,7 +37,6 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-util</artifactId>
