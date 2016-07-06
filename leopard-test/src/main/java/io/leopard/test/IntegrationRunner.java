@@ -42,7 +42,7 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 		boolean isOnlyTransactional;
 		try {
 			isOnlyTransactional = isOnlyTransactional();
-			System.err.println("isOnlyTransactional:" + isOnlyTransactional);
+			// System.err.println("isOnlyTransactional:" + isOnlyTransactional);
 		}
 		catch (IOException e) {
 			isOnlyTransactional = false;
