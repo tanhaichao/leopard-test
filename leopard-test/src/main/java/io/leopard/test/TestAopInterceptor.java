@@ -5,8 +5,11 @@ import java.util.Set;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
+import org.springframework.beans.factory.BeanFactory;
+
+import io.leopard.test.xarg.XargResolver;
+import io.leopard.test.xarg.XargResolverImpl;
 
 /**
  * 方法调用堆栈.
@@ -17,6 +20,8 @@ import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 public class TestAopInterceptor extends BeanNameAutoProxyCreator implements MethodInterceptor {
 
 	private static final long serialVersionUID = 1L;
+
+	private XargResolver xargResolver = new XargResolverImpl();
 
 	public TestAopInterceptor() {
 
@@ -37,6 +42,12 @@ public class TestAopInterceptor extends BeanNameAutoProxyCreator implements Meth
 	}
 
 	@Override
+	public void setBeanFactory(BeanFactory beanFactory) {
+		super.setBeanFactory(beanFactory);
+		xargResolver.setBeanFactory(beanFactory);
+	}
+
+	@Override
 	protected boolean isMatch(String beanName, String mappedName) {
 
 		if (IGNORED_BEAN_NAME_SET.contains(beanName)) {
@@ -48,11 +59,18 @@ public class TestAopInterceptor extends BeanNameAutoProxyCreator implements Meth
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-		// String className = invocation.getThis().getClass().getName();
-		Object[] args = invocation.getArguments();
-		String params = StringUtils.join(args, ",");
-		logger.info("TestAopInterceptor invoke method:" + invocation.getMethod().toGenericString() + " params:" + params);
-		Object result = invocation.proceed();
+		Class<?> clazz = invocation.getMethod().getDeclaringClass();
+		// Object[] args = invocation.getArguments();
+		// String params = StringUtils.join(args, ",");
+		// logger.info("TestAopInterceptor invoke method:" + invocation.getMethod().toGenericString() + " params:" + params);
+		XargResolver resolver = xargResolver.match(invocation, clazz);
+		Object result;
+		if (resolver == null) {
+			result = invocation.proceed();
+		}
+		else {
+			result = resolver.invoke(invocation);
+		}
 		return result;
 	}
 
