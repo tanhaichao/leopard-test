@@ -34,6 +34,7 @@ public class XargResolverControllerImpl implements XargResolver {
 	@Override
 	public XargResolver match(MethodInvocation invocation, Class<?> clazz) {
 		try {
+			// 忽略java8的语法
 			Method method = invocation.getMethod();
 			CtClassUtil.getParameterNames(method);
 		}
