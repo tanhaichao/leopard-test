@@ -33,6 +33,14 @@ public class XargResolverControllerImpl implements XargResolver {
 
 	@Override
 	public XargResolver match(MethodInvocation invocation, Class<?> clazz) {
+		try {
+			Method method = invocation.getMethod();
+			CtClassUtil.getParameterNames(method);
+		}
+		catch (RuntimeException e) {
+			return null;
+		}
+
 		boolean isController = clazz.getName().endsWith("Controller");
 		// logger.info("match:" + invocation.getMethod().toGenericString() + " isController:" + isController + " clazz:" + clazz.getName());
 		if (isController) {
