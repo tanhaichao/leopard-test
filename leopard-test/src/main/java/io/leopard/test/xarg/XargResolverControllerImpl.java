@@ -26,7 +26,7 @@ public class XargResolverControllerImpl implements XargResolver {
 		Map<String, Xarg> map = factory.getBeansOfType(Xarg.class);
 		for (Entry<String, Xarg> entry : map.entrySet()) {
 			Xarg xarg = entry.getValue();
-			System.err.println("xarg:" + xarg);
+			// System.err.println("xarg:" + xarg);
 			paramMap.put(xarg.getKey(), xarg);
 		}
 	}
@@ -65,7 +65,7 @@ public class XargResolverControllerImpl implements XargResolver {
 			args[i] = xarg.getValue(null, args[i]);
 		}
 
-		logger.info("invoke:" + invocation.getMethod().toGenericString());
+		// logger.info("invoke:" + invocation.getMethod().toGenericString());
 		return method.invoke(bean, args);
 	}
 
