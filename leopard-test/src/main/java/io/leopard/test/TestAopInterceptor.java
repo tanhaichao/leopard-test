@@ -1,5 +1,6 @@
 package io.leopard.test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -69,7 +70,12 @@ public class TestAopInterceptor extends BeanNameAutoProxyCreator implements Meth
 			result = invocation.proceed();
 		}
 		else {
-			result = resolver.invoke(invocation);
+			try {
+				result = resolver.invoke(invocation);
+			}
+			catch (InvocationTargetException e) {
+				throw e.getTargetException();
+			}
 		}
 		return result;
 	}
