@@ -19,9 +19,7 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 	public IntegrationRunner(Class<?> clazz) throws InitializationError {
 		super(clazz);
 		this.clazz = clazz;
-		
-		
-		
+
 		super.getTestContextManager();
 		// TODO
 		// UseH2 anno = clazz.getAnnotation(UseH2.class);
@@ -33,6 +31,11 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 	}
 
 	protected boolean isOnlyTransactional() throws IOException {
+		int testCount = this.getDescription().testCount();
+		if (testCount == 1) {
+			return false;
+		}
+
 		InputStream input = clazz.getResourceAsStream("/autounit.properties");
 		Properties props = new Properties();
 		props.load(input);
