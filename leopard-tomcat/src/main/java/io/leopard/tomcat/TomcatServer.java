@@ -7,9 +7,6 @@ import org.apache.catalina.webresources.StandardRoot;
 public class TomcatServer {
 
 	public static void start() throws Exception {
-
-		org.apache.catalina.webresources.Cache ddd;
-		org.apache.catalina.core.StandardEngine dda;
 		Tomcat tomcat = new Tomcat();
 		tomcat.setHostname("localhost");
 		tomcat.setPort(80);
