@@ -25,6 +25,10 @@ public class IntegrationTests extends AbstractJUnit4SpringContextTests {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
+	static {
+		System.setProperty("env.junit", "true");
+	}
+
 	@AfterClass
 	public static void leave() {
 		// TODO
