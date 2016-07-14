@@ -77,10 +77,10 @@ public class HostResourceHandler extends ResourceHandler {
 			output.write(i);
 		}
 		input.close();
-
 		String content = output.toString();
-		content = resourceAppender.append(request, path, content);
-		Resource resource2 = new StringResource(content);
+		StringBuffer sb = new StringBuffer(content);
+		resourceAppender.append(request, path, sb);
+		Resource resource2 = new StringResource(sb.toString());
 		// /js/jquery.min.js
 		// System.err.println("HostResourceHandler getResource:");
 		return resource2;
