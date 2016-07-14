@@ -1,7 +1,9 @@
 package io.leopard.jetty.handler;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -39,15 +41,24 @@ public class HostResourceHandler extends ResourceHandler {
 
 	}
 
-	@Override
-	public Resource getResource(String path) {
-		Resource resource = super.getResource(path);
+	protected Resource getResource(HttpServletRequest request) throws MalformedURLException {
+		System.err.println("getResource uri:" + request.getRequestURI());
+		// return super.getResource(request);
+		// }
+		//
+		// @Override
+		// public Resource getResource(String path) {
+		// System.err.println("getResource path:" + path);
+
+		Resource resource = super.getResource(request);
 		if (resource == null || !resource.exists()) {
 			return resource;
 		}
+
+		String path = request.getRequestURI();
 		if ("/js/jquery.min.js".equals(path)) {
 			try {
-				resource = this.append(resource);
+				resource = this.append(request, resource, path);
 			}
 			catch (IOException e) {
 				throw new RuntimeException(e.getMessage(), e);
@@ -56,12 +67,22 @@ public class HostResourceHandler extends ResourceHandler {
 		return resource;
 	}
 
-	protected Resource append(Resource resource) throws IOException {
+	private static ResourceAppender resourceAppender = new ResourceAppenderImpl();
+
+	protected Resource append(HttpServletRequest request, Resource resource, String path) throws IOException {
 		InputStream input = resource.getInputStream();
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		int i = -1;
+		while ((i = input.read()) != -1) {
+			output.write(i);
+		}
 		input.close();
-		Resource resource2 = new StringResource("ok");
+
+		String content = output.toString();
+		content = resourceAppender.append(request, path, content);
+		Resource resource2 = new StringResource(content);
 		// /js/jquery.min.js
-		System.err.println("HostResourceHandler getResource:");
+		// System.err.println("HostResourceHandler getResource:");
 		return resource2;
 	}
 

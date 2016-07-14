@@ -1,7 +1,6 @@
 package io.leopard.jetty.handler;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringBufferInputStream;
@@ -47,7 +46,7 @@ public class StringResource extends Resource {
 
 	@Override
 	public long length() {
-		throw new RuntimeException("not impl.");
+		return this.content.getBytes().length;
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class StringResource extends Resource {
 		throw new RuntimeException("not impl.");
 	}
 
-	@SuppressWarnings("deprecation")
+	// @SuppressWarnings("deprecation")
 	@Override
 	public InputStream getInputStream() throws IOException {
 		return new StringBufferInputStream(content);
@@ -73,7 +72,8 @@ public class StringResource extends Resource {
 
 	@Override
 	public ReadableByteChannel getReadableByteChannel() throws IOException {
-		throw new FileNotFoundException("not impl.");
+		// throw new FileNotFoundException("not impl.");
+		return null;
 	}
 
 	@Override
