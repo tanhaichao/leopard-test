@@ -50,6 +50,7 @@
 		<module>leopard-jetty-test</module>
 		<module>leopard-tomcat</module>
 		<module>leopard-jetty-jsp</module>
+		<module>leopard-jetty-handler</module>
 	</modules>
 
 </project>
