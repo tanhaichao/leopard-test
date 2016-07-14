@@ -1,7 +1,7 @@
 package io.leopard.jetty.handler;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -42,10 +42,27 @@ public class HostResourceHandler extends ResourceHandler {
 	@Override
 	public Resource getResource(String path) {
 		Resource resource = super.getResource(path);
-		if (resource != null && resource.exists()) {
-			System.err.println("HostResourceHandler getResource:" + path);
+		if (resource == null || !resource.exists()) {
+			return resource;
+		}
+		if ("/js/jquery.min.js".equals(path)) {
+			try {
+				resource = this.append(resource);
+			}
+			catch (IOException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			}
 		}
 		return resource;
+	}
+
+	protected Resource append(Resource resource) throws IOException {
+		InputStream input = resource.getInputStream();
+		input.close();
+		Resource resource2 = new StringResource("ok");
+		// /js/jquery.min.js
+		System.err.println("HostResourceHandler getResource:");
+		return resource2;
 	}
 
 }
