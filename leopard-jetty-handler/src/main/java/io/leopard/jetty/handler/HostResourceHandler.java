@@ -27,7 +27,6 @@ public class HostResourceHandler extends ResourceHandler {
 	@Override
 	public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// System.out.println("HostResourceHandler handle serverName:" + request.getServerName() + " host:" + host + " resourceBase:" + this.getResourceBase());
-
 		if (host != null && host.length() > 0) {
 			String serverName = request.getServerName();
 			// System.out.println("HostResourceHandler serverName:" + serverName + " host:" + host);
