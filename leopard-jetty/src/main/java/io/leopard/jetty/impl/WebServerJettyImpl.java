@@ -15,9 +15,9 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 import io.leopard.jetty.LeopardClassLoader;
+import io.leopard.jetty.ResourcesManager;
 import io.leopard.jetty.ServerInitializer;
 import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
-import io.leopard.jetty.rewriter.RewriterContext;
 
 public class WebServerJettyImpl extends AbstractWebServer {
 
@@ -71,7 +71,7 @@ public class WebServerJettyImpl extends AbstractWebServer {
 		webContext.setParentLoaderPriority(true);
 		// logger.debug(webContext.dump());
 
-		Handler rewriteHandler = RewriterContext.getHandler();
+		Handler rewriteHandler = ResourcesManager.getHandler();
 		if (rewriteHandler == null) {
 			server.setHandler(webContext);
 		}
