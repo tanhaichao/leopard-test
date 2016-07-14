@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.BindException;
 
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.FragmentConfiguration;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
@@ -15,6 +17,7 @@ import org.eclipse.jetty.webapp.WebXmlConfiguration;
 import io.leopard.jetty.LeopardClassLoader;
 import io.leopard.jetty.ServerInitializer;
 import io.leopard.jetty.configuration.EmbedWebInfConfiguration;
+import io.leopard.jetty.rewriter.RewriterContext;
 
 public class WebServerJettyImpl extends AbstractWebServer {
 
@@ -67,7 +70,17 @@ public class WebServerJettyImpl extends AbstractWebServer {
 
 		webContext.setParentLoaderPriority(true);
 		// logger.debug(webContext.dump());
-		server.setHandler(webContext);
+
+		Handler rewriteHandler = RewriterContext.getHandler();
+		if (rewriteHandler == null) {
+			server.setHandler(webContext);
+		}
+		else {
+			HandlerCollection handlers = new HandlerCollection();
+			handlers.addHandler(rewriteHandler);
+			handlers.addHandler(webContext);
+			server.setHandler(handlers);
+		}
 		server.setStopAtShutdown(true);
 
 		return server;
