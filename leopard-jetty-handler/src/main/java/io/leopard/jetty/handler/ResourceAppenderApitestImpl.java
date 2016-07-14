@@ -2,12 +2,19 @@ package io.leopard.jetty.handler;
 
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 临时实现
+ * 
+ * @author 谭海潮
+ *
+ */
 public class ResourceAppenderApitestImpl implements ResourceAppender {
 
 	private static Set<String> HOST_SET = new HashSet<String>();
@@ -28,23 +35,9 @@ public class ResourceAppenderApitestImpl implements ResourceAppender {
 		if (!HOST_SET.contains(serverName)) {
 			return;
 		}
-		Set<String> servletSet = this.getServlets(request);
-		if (!servletSet.contains("/apitest/index.leo")) {
-			return;
-		}
-		sb.append("\n\nHello APITest...");
-	}
 
-	protected Set<String> getServlets(HttpServletRequest request) {
-		Map<String, ? extends ServletRegistration> map = request.getServletContext().getServletRegistrations();
-		Set<String> servletSet = new HashSet<String>();
-		for (Entry<String, ? extends ServletRegistration> entry : map.entrySet()) {
-			// String name = entry.getKey();
-			ServletRegistration servlet = entry.getValue();
-			servletSet.addAll(servlet.getMappings());
-			// System.out.println("name:" + name + " url:" + servlet.getMappings());
-		}
-		return servletSet;
+		String filename = "/home/workspace/apitest/apitest-web/src/main/resources/";
+		sb.append("\n\nHello APITest...");
 	}
 
 }
