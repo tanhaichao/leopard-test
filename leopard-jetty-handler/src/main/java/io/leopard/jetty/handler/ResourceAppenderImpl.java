@@ -18,7 +18,7 @@ public class ResourceAppenderImpl implements ResourceAppender {
 		for (ResourceAppender appender : list) {
 			appender.append(request, path, sb);
 		}
-		sb.append("\n\n" + "//Hello APITest");
+		sb.append("\n\n" + "//Hello Leopard Jetty");
 	}
 
 }
