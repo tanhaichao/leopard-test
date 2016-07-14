@@ -95,5 +95,10 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-jetty-handler</artifactId>
+			<version>0.9.7-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

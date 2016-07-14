@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 
-import io.leopard.jetty.resource.HostResourceHandler;
+import io.leopard.jetty.handler.HostResourceHandler;
 
 public class ResourcesManager {
 
