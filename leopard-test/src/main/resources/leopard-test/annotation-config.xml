@@ -9,4 +9,5 @@
 	<import resource="classpath*:/leopard-plugin.xml" />
 
 	<bean id="testAopInterceptor" class="io.leopard.test.TestAopInterceptor" />
+	
 </beans>
