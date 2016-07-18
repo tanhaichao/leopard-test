@@ -1,10 +1,13 @@
 package io.leopard.treedata;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Row {
 
 	private int floor;
-	private String name;
-	private String colour;
+
+	private List<String> data = new ArrayList<String>();
 
 	public int getFloor() {
 		return floor;
@@ -14,20 +17,15 @@ public class Row {
 		this.floor = floor;
 	}
 
-	public String getName() {
-		return name;
+	public String getData(int index) {
+		if (index >= data.size()) {
+			return null;
+		}
+		return data.get(index);
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getColour() {
-		return colour;
-	}
-
-	public void setColour(String colour) {
-		this.colour = colour;
+	public void addData(String value) {
+		data.add(value);
 	}
 
 }
