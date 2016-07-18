@@ -51,6 +51,7 @@
 		<module>leopard-tomcat</module>
 		<module>leopard-jetty-jsp</module>
 		<module>leopard-jetty-handler</module>
+		<module>leopard-treedata</module>
 	</modules>
 
 </project>
