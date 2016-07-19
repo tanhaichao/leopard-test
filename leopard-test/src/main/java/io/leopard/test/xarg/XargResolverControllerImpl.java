@@ -65,6 +65,7 @@ public class XargResolverControllerImpl implements XargResolver {
 			args[i] = xarg.getValue(null, args[i]);
 		}
 
+		method.setAccessible(true);
 		// logger.info("invoke:" + invocation.getMethod().toGenericString());
 		return method.invoke(bean, args);
 	}
