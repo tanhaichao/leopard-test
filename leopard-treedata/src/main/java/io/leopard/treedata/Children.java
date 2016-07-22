@@ -11,9 +11,9 @@ public class Children {
 
 	private List<Children> children;
 
-	public Children(String name) {
-		this(name, null);
-	}
+	// public Children(String name) {
+	// this(name, null);
+	// }
 
 	public Children(String name, String colour) {
 		this.name = name;

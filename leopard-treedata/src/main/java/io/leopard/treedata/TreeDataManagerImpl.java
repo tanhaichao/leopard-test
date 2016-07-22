@@ -20,7 +20,7 @@ public class TreeDataManagerImpl implements TreeDataManager {
 		List<Children> list = new ArrayList<Children>();
 		for (Row row : rows) {
 			if (row.getFloor() == 0) {
-				Children children = new Children(row.getData(0));
+				Children children = new Children(row.getData(0), row.getData(1));
 				list.add(children);
 			}
 		}

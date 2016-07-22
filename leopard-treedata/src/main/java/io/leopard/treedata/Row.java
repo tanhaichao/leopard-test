@@ -21,6 +21,8 @@ public class Row {
 		if (blocks.length > 1) {
 			this.addData(blocks[1].trim());
 		}
+
+		System.out.println("data:" + data);
 	}
 
 	public String getLine() {
