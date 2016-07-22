@@ -7,7 +7,29 @@ public class Row {
 
 	private int floor;
 
+	private String line;
+
 	private List<String> data = new ArrayList<String>();
+
+	public Row(int floor, String line) {
+		this.setFloor(floor);
+		line = line.trim();
+		this.line = line;
+		String[] blocks = line.split("\t+");
+		System.out.println("line:" + line + " blocks:" + blocks.length);
+		this.addData(blocks[0].trim());
+		if (blocks.length > 1) {
+			this.addData(blocks[1].trim());
+		}
+	}
+
+	public String getLine() {
+		return line;
+	}
+
+	public void setLine(String line) {
+		this.line = line;
+	}
 
 	public int getFloor() {
 		return floor;

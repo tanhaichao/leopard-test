@@ -38,6 +38,8 @@ public class TreeDataManagerImpl implements TreeDataManager {
 				index++;
 				continue;
 			}
+
+			// System.out.println("row:" + row.getText());
 			String name = row.getData(0);
 			String colour = row.getData(1);
 
@@ -85,15 +87,7 @@ public class TreeDataManagerImpl implements TreeDataManager {
 				continue;
 			}
 			int floor = this.floor(line);
-			Row row = new Row();
-			row.setFloor(floor);
-
-			line = line.trim();
-			String[] blocks = line.split("\t+");
-			row.addData(blocks[0].trim());
-			if (blocks.length > 1) {
-				row.addData(blocks[1].trim());
-			}
+			Row row = new Row(floor, line);
 			// System.out.println("floor:" + floor);
 			list.add(row);
 		}
