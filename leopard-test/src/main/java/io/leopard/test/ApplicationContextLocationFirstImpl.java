@@ -10,7 +10,7 @@ public class ApplicationContextLocationFirstImpl implements ApplicationContextLo
 	@Override
 	public String[] get() {
 		ClassPathResource resource = new ClassPathResource(ENTRY_FIRST);
-		System.err.println("resource.exists():" + resource.exists() + " ENTRY_FIRST:" + ENTRY_FIRST);
+		// System.err.println("resource.exists():" + resource.exists() + " ENTRY_FIRST:" + ENTRY_FIRST);
 		if (resource.exists()) {
 			return new String[] { ENTRY_FIRST };
 		}
