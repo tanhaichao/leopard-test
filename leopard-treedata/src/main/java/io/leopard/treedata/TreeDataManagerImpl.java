@@ -20,7 +20,7 @@ public class TreeDataManagerImpl implements TreeDataManager {
 		List<Children> list = new ArrayList<Children>();
 		for (Row row : rows) {
 			if (row.getFloor() == 0) {
-				Children children = new Children(row.getData(0), row.getData(1));
+				Children children = new Children(row.getData(0), row.getData(1), row.getLine());
 				list.add(children);
 			}
 		}
@@ -42,13 +42,14 @@ public class TreeDataManagerImpl implements TreeDataManager {
 			// System.out.println("row:" + row.getText());
 			String name = row.getData(0);
 			String colour = row.getData(1);
+			String line = row.getLine();
 
 			int floor = row.getFloor();
 			int diff = row.getFloor() - preFloor;
 			preFloor = row.getFloor();
 			if (diff > 0) {
 				// 下一级
-				Children c = preChildren.add(name, colour);
+				Children c = preChildren.add(name, colour, line);
 				System.err.println("下 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
 				parentMap.put(floor, c);
 				preChildren = c;
@@ -57,14 +58,14 @@ public class TreeDataManagerImpl implements TreeDataManager {
 				// 上一级
 				Children c = parentMap.get(floor - 1);
 				System.err.println("上 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
-				preChildren = c.add(name, colour);
+				preChildren = c.add(name, colour, line);
 				parentMap.put(floor, preChildren);
 			}
 			else {
 				// 同级
 				System.out.println("floor - 1:" + (floor - 1));
 				Children c = parentMap.get(floor - 1);
-				Children current = c.add(name, colour);
+				Children current = c.add(name, colour, line);
 				parentMap.put(floor, current);
 				System.err.println("同 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
 				preChildren = current;
