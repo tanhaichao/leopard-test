@@ -50,24 +50,24 @@ public class TreeDataManagerImpl implements TreeDataManager {
 			if (diff > 0) {
 				// 下一级
 				Children c = preChildren.add(name, colour, line);
-				System.err.println("下 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
+				// System.err.println("下 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
 				parentMap.put(floor, c);
 				preChildren = c;
 			}
 			else if (diff < 0) {
 				// 上一级
 				Children c = parentMap.get(floor - 1);
-				System.err.println("上 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
+				// System.err.println("上 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
 				preChildren = c.add(name, colour, line);
 				parentMap.put(floor, preChildren);
 			}
 			else {
 				// 同级
-				System.out.println("floor - 1:" + (floor - 1));
+				// System.out.println("floor - 1:" + (floor - 1));
 				Children c = parentMap.get(floor - 1);
 				Children current = c.add(name, colour, line);
 				parentMap.put(floor, current);
-				System.err.println("同 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
+				// System.err.println("同 floor:" + floor + " diff:" + diff + " name:" + name + " c:" + c.getName() + " pre:" + preChildren.getName());
 				preChildren = current;
 			}
 		}

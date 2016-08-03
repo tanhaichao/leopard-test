@@ -16,13 +16,13 @@ public class Row {
 		line = line.trim();
 		this.line = line;
 		String[] blocks = line.split("\t+");
-		System.out.println("line:" + line + " blocks:" + blocks.length);
+		// System.out.println("line:" + line + " blocks:" + blocks.length);
 		this.addData(blocks[0].trim());
 		if (blocks.length > 1) {
 			this.addData(blocks[1].trim());
 		}
 
-		System.out.println("data:" + data);
+		// System.out.println("data:" + data);
 	}
 
 	public String getLine() {
