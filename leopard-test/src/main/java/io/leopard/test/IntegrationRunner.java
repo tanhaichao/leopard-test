@@ -9,6 +9,7 @@ import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
+import org.springframework.test.context.TestContextManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 	public IntegrationRunner(Class<?> clazz) throws InitializationError {
 		super(clazz);
 		this.clazz = clazz;
+		System.err.println("IntegrationRunner clazz:" + clazz.getName());
 
 		super.getTestContextManager();
 		// TODO
@@ -28,6 +30,20 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 		// boolean rollback = anno.rollback();
 		// DefaultH2DataSource.setUseH2(useH2, "integration", !rollback);
 		// }
+	}
+
+	@Override
+	protected TestContextManager createTestContextManager(Class<?> clazz) {
+		// System.err.println("IntegrationRunner createTestContextManager clazz:" + clazz.getName());
+		try {
+			TestContextManager manager = super.createTestContextManager(clazz);
+			// System.err.println("IntegrationRunner createTestContextManager manager:" + manager);
+			return manager;
+		}
+		catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	protected boolean isOnlyTransactional() throws IOException {
