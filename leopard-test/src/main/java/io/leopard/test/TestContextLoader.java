@@ -37,18 +37,18 @@ public class TestContextLoader implements SmartContextLoader {
 		// files = ArrayUtil.insertFirst(files, "/leopard-test/annotation-config.xml");
 		locations = StringUtils.addStringToArray(locations, "/leopard-test/annotation-config.xml");
 		configAttributes.setLocations(locations);
-		System.err.println("processContextConfiguration:" + org.apache.commons.lang.StringUtils.join(configAttributes.getLocations(), ","));
+		// System.err.println("processContextConfiguration:" + org.apache.commons.lang.StringUtils.join(configAttributes.getLocations(), ","));
 	}
 
 	@Override
 	public ApplicationContext loadContext(String... locations) throws Exception {
-		System.err.println("loadContext:" + org.apache.commons.lang.StringUtils.join(locations, ","));
+		// System.err.println("loadContext:" + org.apache.commons.lang.StringUtils.join(locations, ","));
 		return new ClassPathXmlApplicationContext(locations);
 	}
 
 	@Override
 	public ApplicationContext loadContext(MergedContextConfiguration mergedConfig) throws Exception {
-		System.err.println("loadContext:" + mergedConfig);
+		// System.err.println("loadContext:" + mergedConfig);
 		return loadContext(mergedConfig.getLocations());
 	}
 
