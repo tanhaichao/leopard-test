@@ -20,9 +20,9 @@ public class IntegrationRunner extends SpringJUnit4ClassRunner {
 	public IntegrationRunner(Class<?> clazz) throws InitializationError {
 		super(clazz);
 		this.clazz = clazz;
-		System.err.println("IntegrationRunner clazz:" + clazz.getName());
+		// System.err.println("IntegrationRunner clazz:" + clazz.getName());
 
-		super.getTestContextManager();
+		// super.getTestContextManager();
 		// TODO
 		// UseH2 anno = clazz.getAnnotation(UseH2.class);
 		// if (anno != null) {
