@@ -39,7 +39,7 @@ public class TreeDataManagerImpl implements TreeDataManager {
 				continue;
 			}
 
-			// System.out.println("row:" + row.getText());
+			System.out.println("row:" + row.getLine());
 			String name = row.getData(0);
 			String colour = row.getData(1);
 			String line = row.getLine();
