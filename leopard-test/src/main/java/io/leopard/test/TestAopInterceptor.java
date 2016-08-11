@@ -60,6 +60,9 @@ public class TestAopInterceptor extends BeanNameAutoProxyCreator implements Meth
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
+		if (true) {
+			return invocation.proceed();
+		}
 		Class<?> clazz = invocation.getMethod().getDeclaringClass();
 		// Object[] args = invocation.getArguments();
 		// String params = StringUtils.join(args, ",");
