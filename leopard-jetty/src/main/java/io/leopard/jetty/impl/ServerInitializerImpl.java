@@ -11,8 +11,17 @@ public class ServerInitializerImpl implements ServerInitializer {
 			Runnable runnable = (Runnable) Class.forName(className).newInstance();
 			runnable.run();
 		}
-		catch (Exception e) {
+		catch (RuntimeException e) {
 			// System.err.println("init hosts error:" + e.toString());
+			e.printStackTrace();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
 			// e.printStackTrace();
 		}
 		System.setProperty("spring.profiles.active", "dev");
