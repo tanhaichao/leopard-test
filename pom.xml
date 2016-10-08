@@ -66,6 +66,7 @@
 		<module>leopard-jetty-jsp</module>
 		<module>leopard-jetty-handler</module>
 		<module>leopard-treedata</module>
+		<module>leopard-mocknb</module>
 	</modules>
 
 </project>
